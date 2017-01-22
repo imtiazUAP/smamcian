@@ -29,14 +29,11 @@
       <file leaf-file-name="nav_menu.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nav_menu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="252" column="25" selection-start="12418" selection-end="12418" vertical-scroll-proportion="0.3898858" vertical-offset="4045" max-vertical-offset="4658">
+            <state line="122" column="0" selection-start="6188" selection-end="6188" vertical-scroll-proportion="0.67066896" vertical-offset="1683" max-vertical-offset="4658">
               <folding>
-                <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#!!top" expanded="true" />
-                <marker date="1484079608653" expanded="true" signature="12365:12561" placeholder="Insert into ..." />
-                <marker date="1484079608653" expanded="true" signature="12365:12630" placeholder="Insert into ..." />
-                <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
-                <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
-                <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
+                <marker date="1485101253817" expanded="true" signature="12365:12561" placeholder="Insert into ..." />
+                <marker date="1485101253817" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
+                <marker date="1485101253817" expanded="true" signature="12365:12630" placeholder="Insert into ..." />
               </folding>
             </state>
           </provider>
@@ -63,7 +60,7 @@
       <file leaf-file-name="blood_bank.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blood_bank.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="53" selection-start="5085" selection-end="5085" vertical-scroll-proportion="-0.0" vertical-offset="1734" max-vertical-offset="3451">
+            <state line="102" column="53" selection-start="5085" selection-end="5085" vertical-scroll-proportion="0.0" vertical-offset="1734" max-vertical-offset="3451">
               <folding />
             </state>
           </provider>
@@ -82,10 +79,7 @@
         <entry file="file://$PROJECT_DIR$/find_blood.php">
           <provider selected="true" editor-type-id="text-editor">
             <state line="150" column="37" selection-start="7536" selection-end="7536" vertical-scroll-proportion="0.0" vertical-offset="2550" max-vertical-offset="4318">
-              <folding>
-                <marker date="1484075766672" expanded="true" signature="662:727" placeholder="SELECT DISTI..blood_group..." />
-                <marker date="1484075766672" expanded="true" signature="1712:1766" placeholder="SELECT DISTI..area..." />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -96,6 +90,10 @@
     <FindUsagesManager>
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="SYNC_SETTING" value="DONT" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
@@ -120,9 +118,9 @@
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1382" />
-    <option name="height" value="784" />
+    <option name="height" value="754" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -174,7 +172,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
-    <property name="options.lastSelected" value="web-ide.project.structure" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -223,8 +221,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -239,11 +237,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -279,12 +277,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="31" column="65" selection-start="1865" selection-end="1865" vertical-scroll-proportion="0.0" vertical-offset="527" max-vertical-offset="2006">
           <folding>
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#!!top" expanded="true" />
-            <marker date="1484079608653" expanded="true" signature="12365:12561" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12630" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
+            <marker date="1485101253817" expanded="true" signature="12365:12561" placeholder="Insert into ..." />
+            <marker date="1485101253817" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
+            <marker date="1485101253817" expanded="true" signature="12365:12630" placeholder="Insert into ..." />
           </folding>
         </state>
       </provider>
@@ -311,10 +306,7 @@
     <entry file="file://$PROJECT_DIR$/find_blood.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="58" selection-start="442" selection-end="442" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="3366">
-          <folding>
-            <marker date="1484075766672" expanded="true" signature="662:727" placeholder="SELECT DISTI..blood_group..." />
-            <marker date="1484075766672" expanded="true" signature="1712:1766" placeholder="SELECT DISTI..area..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -349,12 +341,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="83" column="20" selection-start="4368" selection-end="4368" vertical-scroll-proportion="0.0" vertical-offset="1411" max-vertical-offset="1785">
           <folding>
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#!!top" expanded="true" />
-            <marker date="1484079608653" expanded="true" signature="12365:12561" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12630" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
+            <marker date="1485101253817" expanded="true" signature="12365:12561" placeholder="Insert into ..." />
+            <marker date="1485101253817" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
+            <marker date="1485101253817" expanded="true" signature="12365:12630" placeholder="Insert into ..." />
           </folding>
         </state>
       </provider>
@@ -381,10 +370,7 @@
     <entry file="file://$PROJECT_DIR$/find_blood.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="58" selection-start="442" selection-end="442" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="3366">
-          <folding>
-            <marker date="1484075766672" expanded="true" signature="662:727" placeholder="SELECT DISTI..blood_group..." />
-            <marker date="1484075766672" expanded="true" signature="1712:1766" placeholder="SELECT DISTI..area..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -419,12 +405,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="79" selection-start="1704" selection-end="1704" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="714">
           <folding>
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#!!top" expanded="true" />
-            <marker date="1484079608653" expanded="true" signature="12365:12561" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12630" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
+            <marker date="1485101253817" expanded="true" signature="12365:12561" placeholder="Insert into ..." />
+            <marker date="1485101253817" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
+            <marker date="1485101253817" expanded="true" signature="12365:12630" placeholder="Insert into ..." />
           </folding>
         </state>
       </provider>
@@ -451,10 +434,7 @@
     <entry file="file://$PROJECT_DIR$/find_blood.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="58" selection-start="442" selection-end="442" vertical-scroll-proportion="0.0" vertical-offset="183" max-vertical-offset="3366">
-          <folding>
-            <marker date="1484075766672" expanded="true" signature="662:727" placeholder="SELECT DISTI..blood_group..." />
-            <marker date="1484075766672" expanded="true" signature="1712:1766" placeholder="SELECT DISTI..area..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -487,12 +467,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="59" selection-start="433" selection-end="433" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="714">
           <folding>
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#!!top" expanded="true" />
-            <marker date="1484079608653" expanded="true" signature="12365:12561" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12630" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
+            <marker date="1485101253817" expanded="true" signature="12365:12561" placeholder="Insert into ..." />
+            <marker date="1485101253817" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
+            <marker date="1485101253817" expanded="true" signature="12365:12630" placeholder="Insert into ..." />
           </folding>
         </state>
       </provider>
@@ -519,10 +496,7 @@
     <entry file="file://$PROJECT_DIR$/find_blood.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="56" column="7" selection-start="3725" selection-end="3725" vertical-scroll-proportion="0.0" vertical-offset="446" max-vertical-offset="1054">
-          <folding>
-            <marker date="1484075766672" expanded="true" signature="662:727" placeholder="SELECT DISTI..blood_group..." />
-            <marker date="1484075766672" expanded="true" signature="1712:1766" placeholder="SELECT DISTI..area..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -583,10 +557,7 @@
     <entry file="file://$PROJECT_DIR$/find_blood.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="150" column="37" selection-start="7536" selection-end="7536" vertical-scroll-proportion="0.0" vertical-offset="2550" max-vertical-offset="4318">
-          <folding>
-            <marker date="1484075766672" expanded="true" signature="662:727" placeholder="SELECT DISTI..blood_group..." />
-            <marker date="1484075766672" expanded="true" signature="1712:1766" placeholder="SELECT DISTI..area..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -606,14 +577,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nav_menu.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="252" column="25" selection-start="12418" selection-end="12418" vertical-scroll-proportion="0.3898858" vertical-offset="4045" max-vertical-offset="4658">
+        <state line="122" column="0" selection-start="6188" selection-end="6188" vertical-scroll-proportion="0.67066896" vertical-offset="1683" max-vertical-offset="4658">
           <folding>
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#!!top" expanded="true" />
-            <marker date="1484079608653" expanded="true" signature="12365:12561" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12630" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
-            <marker date="1484079608653" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
+            <marker date="1485101253817" expanded="true" signature="12365:12561" placeholder="Insert into ..." />
+            <marker date="1485101253817" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
+            <marker date="1485101253817" expanded="true" signature="12365:12630" placeholder="Insert into ..." />
           </folding>
         </state>
       </provider>
