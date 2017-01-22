@@ -121,7 +121,6 @@ include("nav_menu.php");
         <?php
         include("right_sidebar.php");
         ?>
-
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog modal-md">

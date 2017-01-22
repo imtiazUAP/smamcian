@@ -26,10 +26,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="nav_menu.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="nav_menu.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nav_menu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="122" column="0" selection-start="6188" selection-end="6188" vertical-scroll-proportion="0.67066896" vertical-offset="1683" max-vertical-offset="4658">
+            <state line="122" column="0" selection-start="6188" selection-end="6188" vertical-scroll-proportion="43.615383" vertical-offset="3208" max-vertical-offset="4658">
               <folding>
                 <marker date="1485101253817" expanded="true" signature="12365:12561" placeholder="Insert into ..." />
                 <marker date="1485101253817" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
@@ -57,10 +57,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="blood_bank.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="blood_bank.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blood_bank.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="53" selection-start="5085" selection-end="5085" vertical-scroll-proportion="0.0" vertical-offset="1734" max-vertical-offset="3451">
+            <state line="122" column="10" selection-start="5850" selection-end="5850" vertical-scroll-proportion="0.5989933" vertical-offset="1717" max-vertical-offset="3434">
               <folding />
             </state>
           </provider>
@@ -108,8 +108,8 @@
         <option value="$PROJECT_DIR$/engine1/wowslider.js" />
         <option value="$PROJECT_DIR$/find_blood.php" />
         <option value="$PROJECT_DIR$/batch.php" />
-        <option value="$PROJECT_DIR$/blood_bank.php" />
         <option value="$PROJECT_DIR$/nav_menu.php" />
+        <option value="$PROJECT_DIR$/blood_bank.php" />
       </list>
     </option>
   </component>
@@ -568,21 +568,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blood_bank.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="53" selection-start="5085" selection-end="5085" vertical-scroll-proportion="-0.0" vertical-offset="1734" max-vertical-offset="3451">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nav_menu.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="0" selection-start="6188" selection-end="6188" vertical-scroll-proportion="0.67066896" vertical-offset="1683" max-vertical-offset="4658">
+        <state line="122" column="0" selection-start="6188" selection-end="6188" vertical-scroll-proportion="43.615383" vertical-offset="3208" max-vertical-offset="4658">
           <folding>
             <marker date="1485101253817" expanded="true" signature="12365:12561" placeholder="Insert into ..." />
             <marker date="1485101253817" expanded="true" signature="12365:12608" placeholder="Insert into ..." />
             <marker date="1485101253817" expanded="true" signature="12365:12630" placeholder="Insert into ..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blood_bank.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="122" column="10" selection-start="5850" selection-end="5850" vertical-scroll-proportion="0.5989933" vertical-offset="1717" max-vertical-offset="3434">
+          <folding />
         </state>
       </provider>
     </entry>
