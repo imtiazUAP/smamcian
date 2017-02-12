@@ -135,7 +135,7 @@ session_start();
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Sign Up</h4>
             </div>
-            <form action="" class="span8 form-inline" method="post">
+            <form action="" enctype="multipart/form-data" class="span8 form-inline" method="post">
                 <div class="modal-body">
                     <div class="container">
                         <table>
@@ -157,18 +157,38 @@ session_start();
                             </tr>
                             <tr>
                                 <td>
+                                    <label><b>SMAMC Batch</b></label>
+                                </td>
+                                <td><select name="batchId" class="form-control" id="batchId" required>
+                                        <?php
+                                        $query = "SELECT DISTINCT batch_id,batch_name FROM batch ORDER BY batch_id";
+                                        $rs = mysql_query($query) or die ('Error submitting');
+                                        while ($row = mysql_fetch_assoc($rs)) {
+                                            print("<option value=\"" . $row["batch_id"] . "\">" . $row["batch_name"] . "</option>");
+                                        }
+                                        ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <label><b>Phone</b></label>
                                 </td>
                                 <td>
-                                    <input type="number" placeholder="Enter Phone" name="phoneNumber" required>
+                                    <input type="text" placeholder="Enter Phone" name="phone" required>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <label><b>Living Area</b></label>
                                 </td>
-                                <td>
-                                    <input type="text" placeholder="Enter Living Area" name="livingArea" required>
+                                <td><select name="areaId" class="form-control" id="areaId" required>
+                                        <?php
+                                        $query = "SELECT DISTINCT user_area_id,user_area_name FROM area ORDER BY user_area_id";
+                                        $rs = mysql_query($query) or die ('Error submitting');
+                                        while ($row = mysql_fetch_assoc($rs)) {
+                                            print("<option value=\"" . $row["user_area_id"] . "\">" . $row["user_area_name"] . "</option>");
+                                        }
+                                        ?>
                                 </td>
                             </tr>
                             <tr>
@@ -176,7 +196,7 @@ session_start();
                                     <label><b>Address</b></label>
                                 </td>
                                 <td>
-                                    <input type="text" placeholder="Enter Address" name="address" required>
+                                    <input type="text" placeholder="Enter Address" name="userAddress" required>
                                 </td>
                             </tr>
                             <tr>
@@ -184,7 +204,7 @@ session_start();
                                     <label><b>Blood group</b></label>
                                 </td>
                                 <td>
-                                    <select name="bloodGroup" class="form-control" id="sel1">
+                                    <select name="groupId" class="form-control" id="sel1" required>
                                         <option value="1">A+</option>
                                         <option value="2">A-</option>
                                         <option value="3">AB+</option>
@@ -202,7 +222,7 @@ session_start();
                                     <label><b>Last donated</b></label>
                                 </td>
                                 <td>
-                                    <input type="date" placeholder="Enter Last donation date" name="lastDonated" required>
+                                    <input type="date" placeholder="Enter Last donation date" name="lastDonated" >
                                 </td>
                             </tr>
                             <tr>
@@ -210,7 +230,7 @@ session_start();
                                     <label><b>Total donated</b></label>
                                 </td>
                                 <td>
-                                    <input type="number" placeholder="Enter total donation" name="totalDonated" required> Times
+                                    <input type="number" placeholder="Enter total donation" name="totalDonated" > Times
                                 </td>
                             </tr>
                             <tr>
@@ -218,7 +238,7 @@ session_start();
                                     <label><b>Upload photo</b></label>
                                 </td>
                                 <td>
-                                    <input type="file" name="userPhoto" id="userPhoto">
+                                    <input type="file" name="file" id="file" required>
                                 </td>
                             </tr>
                             <tr>
@@ -234,7 +254,7 @@ session_start();
                                     <label><b>Password</b></label>
                                 </td>
                                 <td>
-                                    <input type="password" placeholder="Enter Password" name="password" required>
+                                    <input type="password" placeholder="Enter Password" name="userPassword" required>
                                 </td>
                             </tr>
                         </table>
@@ -247,18 +267,66 @@ session_start();
                 </div>
             </form>
             <?php
-            if ( isset($_POST['signup']) && !empty($_REQUEST['useremail'])) {
-                $sql = "Insert
+            if (isset($_POST['signup']) && !empty($_REQUEST['firstName'])) {
+                $post_photo = $_FILES['file']['name'];
+                $post_photo_tmp = $_FILES['file']['tmp_name'];
+                $ext = pathinfo($post_photo, PATHINFO_EXTENSION); // getting image extension
+                if ($ext == 'png' || $ext == 'PNG' || $ext == 'jpg' || $ext == 'jpeg' || $ext == 'JPG' || $ext == 'JPEG' || $ext == 'gif' || $ext == 'GIF') {
+                    if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'JPG' || $ext == 'JPEG') {
+                        ini_set('memory_limit', '-1'); //It will take unlimited memory usage of server
+                        $src = imagecreatefromjpeg($post_photo_tmp);
+                    }
+                    if ($ext == 'png' || $ext == 'PNG') {
+                        ini_set('memory_limit', '-1'); //It will take unlimited memory usage of server
+                        $src = imagecreatefrompng($post_photo_tmp);
+                    }
+                    if ($ext == 'gif' || $ext == 'GIF') {
+                        ini_set('memory_limit', '-1'); //It will take unlimited memory usage of server
+                        $src = imagecreatefromgif($post_photo_tmp);
+                    }
+                    list($width_min, $height_min) = getimagesize($post_photo_tmp);
+                    $newwidth_min = 350;
+                    $newheight_min = ($height_min / $width_min) * $newwidth_min;
+                    $tmp_min = imagecreatetruecolor($newwidth_min, $newheight_min);
+                    imagecopyresampled($tmp_min, $src, 0, 0, 0, 0, $newwidth_min, $newheight_min, $width_min, $height_min);
+                    $newfilename = round(microtime(true)) . '.' . $ext;
+                    imagejpeg($tmp_min, "images/users/" . $newfilename, 80); //copy image in folder//
+                    $photo_name = $newfilename; // new name with path to save in database
+
+                    $sql = "Insert
                 into
                     user(
                     user_first_name,
                     user_last_name,
+                    phone,
+                    user_area_id,
+                    user_address,
+                    blood_group_id,
+                    last_donated,
+                    total_donated,
+                    batch_id,
+                    photo_url,
+                    user_email,
+                    user_password
                     )
                 values
-                    ('$_POST[user_first_name]',
-                    '$_POST[user_last_name]')";
-                if (!mysql_query($sql)) {
-                    die('Error:' . mysql_error());
+                    ('$_POST[firstName]',
+                    '$_POST[lastName]',
+                    '$_POST[phone]',
+                    '$_POST[areaId]',
+                    '$_POST[userAddress]',
+                    '$_POST[groupId]',
+                    '$_POST[lastDonated]',
+                    '$_POST[totalDonated]',
+                    '$_POST[batchId]',
+                    '$photo_name',
+                    '$_POST[userEmail]',
+                    '$_POST[userPassword]'
+
+                    )";
+                    if (!mysql_query($sql)) {
+                        die('Error:' . mysql_error());
+                    }
                 }
             }
             ?>
