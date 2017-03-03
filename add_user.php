@@ -1,131 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <?php
+    error_reporting(0);
+    session_start();
+    include("header.php");
+    ?>
+</head>
+<body>
 <?php
-session_start();
+include("nav_menu.php");
 ?>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="glyphicon glyphicon-tint navbar-brand" style="color:red" href="index.php">SMAMCIAN</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <?php if($_SESSION['user_type_id'] == 2 || $_SESSION['user_type_id'] == 1){
-                ?>
-                <li class="active "><a href="administration.php">Admin</a></li>
-                <?php
-                }
-                ?>
-                <li class="active "><a href="index.php">Home</a></li>
-                <li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown" href="blood_bank.php">Blood Bank<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="blood_bank.php?group_id=1"> A+ </a></li>
-                        <li><a href="blood_bank.php?group_id=2"> A- </a></li>
-                        <li><a href="blood_bank.php?group_id=3"> AB+ </a></li>
-                        <li><a href="blood_bank.php?group_id=4"> AB- </a></li>
-                        <li><a href="blood_bank.php?group_id=5"> B+ </a></li>
-                        <li><a href="blood_bank.php?group_id=6"> B- </a></li>
-                        <li><a href="blood_bank.php?group_id=7"> O+ </a></li>
-                        <li><a href="blood_bank.php?group_id=8"> O- </a></li>
-                        <li><a href="blood_bank.php?group_id=9"> Anonymous </a></li>
-                    </ul>
-                </li>
-                <li class="active"><a href="find_blood.php">Find Blood</a></li>
-                <li class="active"><a href="about.php">About</a></li>
-                <li class="active"><a href="contact_us.php">Contact Us</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <?php if(!$_SESSION['user_email']){
-                    ?>
-                <li class="active"><a title="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                <?php } else { ?>
-                    <li class="active"><a href='log_out.php'><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-                <?php } ?>
-            </ul>
-        </div>
-    </div>
-</nav>
 
-<!-- Modal -->
-<div class="modal fade" id="loginModal" role="dialog">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
+<div class="container-fluid text-center">
+    <div class="row content">
+        <?php
+        include("left_sidebar.php");
+        ?>
+        <div class="col-sm-8 text-left">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Log In</h4>
-            </div>
-                <form action="" method="post">
-                    <div class="modal-body">
-                        <div class="container">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <label><b>E-mail</b></label>
-                                    </td>
-                                    <td>
-                                        <input type="text" placeholder="Enter Email" name="useremail" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label><b>Password</b></label>
-                                    </td>
-                                    <td>
-                                        <input type="password" placeholder="Enter Password" name="password" required>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        </br>
-                        <input type="checkbox" checked="checked"> Remember password
-                        <button name="login" type="submit" class="btn btn-success">Login</button>
-                    </div>
-                    <div class="modal-footer">
-                        <span class="psw">Forgot <a href="#">password?</a></span>
-                        <button type="button" class="btn btn-warning" href="#signupModal" data-toggle="modal" data-dismiss="modal">Sign Up</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
-                </form>
-                <?php
-                if ( isset($_POST['login']) && !empty($_REQUEST['useremail'])) {
-                    $usname = $_REQUEST['useremail'];
-                    $uspass = $_REQUEST['password'];
-                    $qry = "select * from user where user_email='" . ($usname) . "' && user_password='" . ($uspass) . "' && active_flag = '1' ";
-                    $usresult = mysql_query($qry);
-                    $usdata = mysql_fetch_assoc($usresult);
-                    if($usdata['user_email']){
-                        $_SESSION['user_email'] = $usdata['user_email'];
-                        $_SESSION['user_id'] = $usdata['user_id'];
-                        $_SESSION['user_type_id'] = $usdata['user_type_id'];
-                        session_write_close();
-                        ?>
-                    <script language="JavaScript">window.location="find_blood.php";</script>
-                        <?php
-                    }else{ ?>
-                    <script language="JavaScript">window.location="login_failed.php";</script>
-                    <?php
-                    }
-                    ?>
-                <?php
-                }
-                ?>
-
-            </div>
-        </div>
-    </div>
-</div>
-<!-- END OF MODAL -->
-
-<!-- Sign up Modal Start -->
-<div class="modal fade" id="signupModal" role="dialog">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Sign Up</h4>
             </div>
             <form action="" enctype="multipart/form-data" class="span8 form-inline" method="post">
@@ -253,14 +146,13 @@ session_start();
                         </table>
                     </div>
                     </br>
-                    <button name="signup" type="submit" class="btn btn-success">Sign Up</button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button name="signup" id="btnSubmit" type="submit" class="btn btn-success">Add User</button>
                 </div>
             </form>
             <?php
-            if (isset($_POST['signup']) && !empty($_REQUEST['firstName'])) {
+            if (isset($_POST["btnSubmit"]) && isset($_POST['submit']) && $_REQUEST['firstName']) {
                 $post_photo = $_FILES['file']['name'];
                 $post_photo_tmp = $_FILES['file']['tmp_name'];
                 $ext = pathinfo($post_photo, PATHINFO_EXTENSION); // getting image extension
@@ -299,8 +191,10 @@ session_start();
                     total_donated,
                     batch_id,
                     photo_url,
+                    active_flag,
                     user_email,
-                    user_password
+                    user_password,
+                    added_by
                     )
                 values
                     ('$_POST[firstName]',
@@ -313,19 +207,34 @@ session_start();
                     '$_POST[totalDonated]',
                     '$_POST[batchId]',
                     '$photo_name',
+                    '1',
                     '$_POST[userEmail]',
-                    '$_POST[userPassword]'
-
+                    '$_POST[userPassword]',
+                    '$_SESSION[user_id]'
                     )";
-                    header("Refresh:0; url=signup_succeed.php");
-                    if (!mysql_query($sql)) {
+
+                    $result = mysql_query($sql);
+
+                    if ($result) {
+                        ?>
+                        <div><h3>User added, add next one...</h3></div>
+                    <?php
+                    } else {
                         die('Error:' . mysql_error());
                     }
                 }
             }
             ?>
-
         </div>
+        <?php
+        include("right_sidebar.php");
+        ?>
     </div>
 </div>
-<!-- END OF Sign up MODAL -->
+
+<?php
+include("footer.php");
+?>
+
+</body>
+</html>

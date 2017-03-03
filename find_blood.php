@@ -94,7 +94,9 @@ include("nav_menu.php");
                                           WHERE
                                           b.blood_group_id = '" . $_POST['blood_group_id'] . "'
                                           AND
-                                          a.user_area_id = '" . $_POST['user_area_id'] . "'";
+                                          a.user_area_id = '" . $_POST['user_area_id'] . "'
+                                          AND
+                                          u.active_flag = '1'";
                 $results = mysql_query($strquery);
                 $num = mysql_numrows($results);
 
@@ -150,13 +152,12 @@ include("nav_menu.php");
                                 </a>
                             </figure>
                         </td>
-                        <td><?php echo $phone ?></td>
+                        <td><?php  echo $_SESSION['user_email'] ? $phone : 'Log in to see' ?></td>
                         <td><?php echo $userAreaName ?></td>
-                        <td><a href="#" title="">
-                                <img class="row_image" src="images/system/<?php echo $bloodGroupName ?>.png"
-                                     class="img-responsive voc_list_preview_img" alt="" title="">
-                                <figcaption><?php echo ($bloodGroupName != 'Anonymous') ? $bloodGroupName . 'Ve' : 'Anonymous' ?></figcaption>
-                            </a>
+                        <td>
+                            <img class="row_image" src="images/system/<?php echo $bloodGroupName ?>.png"
+                                 class="img-responsive voc_list_preview_img" alt="" title="">
+                            <figcaption><?php echo ($bloodGroupName != 'Anonymous') ? $bloodGroupName . 'Ve' : 'Anonymous' ?></figcaption>
                         </td>
                     </tr>
 
@@ -186,7 +187,11 @@ include("nav_menu.php");
                              title=""></br>
                         <label id="availableToDonate"
                                class="label <?= ($availableToDonate == 1) ? 'label-success' : 'label-danger' ?>"></label></br>
-                        <label id="phoneNumber"></label></br>
+                        <?php if($_SESSION['user_email']) {?>
+                            <label id="phoneNumber"></label></br>
+                        <?php } else { ?>
+                            <marquee><span style="font-size: 22px; color: red">Sorry, but we won't provide you any detail info about this donor until you are logged in.</span></span></marquee></br></br>
+                        <?php } ?>
                         <label>Email: </label><label id="userEmail"></label></br>
                         <label>Area: </label><span id="userareaname"></span></br>
                         <label>Address: </label>

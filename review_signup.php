@@ -25,6 +25,7 @@ include("nav_menu.php");
                     <th>Phone</th>
                     <th>Area</th>
                     <th>Blood Group</th>
+                    <th>Review</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,9 +45,7 @@ include("nav_menu.php");
                                             LEFT OUTER JOIN batch bt
                                             ON bt.batch_id = u.batch_id
                                           WHERE
-                                          b.blood_group_id='" . $getBloodGroupId . "'
-                                          AND
-                                          u.active_flag = '1'";
+                                          u.active_flag = 0";
                 $results = mysql_query($strquery);
                 $num = mysql_numrows($results);
 
@@ -102,12 +101,16 @@ include("nav_menu.php");
                                 </a>
                             </figure>
                         </td>
-                        <td><?php  echo $_SESSION['user_email'] ? $phone : 'Log in to see' ?></td>
+                        <td><?php echo $phone ?></td>
                         <td><?php echo $userAreaName ?></td>
-                        <td>
-                            <img class="row_image" src="images/system/<?php echo $bloodGroupName ?>.png"
-                                 class="img-responsive voc_list_preview_img" alt="" title="">
-                            <figcaption><?php echo ($bloodGroupName != 'Anonymous') ? $bloodGroupName . 'Ve' : 'Anonymous' ?></figcaption>
+                        <td><a href="#" title="">
+                                <img class="row_image" src="images/system/<?php echo $bloodGroupName ?>.png"
+                                     class="img-responsive voc_list_preview_img" alt="" title="">
+                                <figcaption><?php echo ($bloodGroupName != 'Anonymous') ? $bloodGroupName . 'Ve' : 'Anonymous' ?></figcaption>
+                            </a>
+                        </td>
+                        <td><input data-userid="<?php echo $userId; ?>" type="submit" class="reviewButton btn btn-success" name="approve" value="approve" />
+                            <input data-userid="<?php echo $userId; ?>" type="submit" class="reviewButton btn btn-danger" name="delete" value="delete" />
                         </td>
                     </tr>
 
@@ -135,11 +138,7 @@ include("nav_menu.php");
                              title=""></br>
                         <label id="availableToDonate"
                                class="label <?= ($availableToDonate == 1) ? 'label-success' : 'label-danger' ?>"></label></br>
-                        <?php if($_SESSION['user_email']) {?>
-                            <label id="phoneNumber"></label></br>
-                        <?php } else { ?>
-                            <marquee><span style="font-size: 22px; color: red">Sorry, but we won't provide you any detail info about this donor until you are logged in.</span></span></marquee></br></br>
-                        <?php } ?>
+                        <label id="phoneNumber"></label></br>
                         <label>Email: </label><label id="userEmail"></label></br>
                         <label>Area: </label><span id="userareaname"></span></br>
                         <label>Address: </label>
@@ -158,6 +157,19 @@ include("nav_menu.php");
             </div>
         </div>
         <script>
+            $(document).ready(function(){
+                $('.reviewButton').click(function(){
+                    var clickBtnValue = $(this).val();
+                    var userId = $(this).data('userid');
+                    var ajaxurl = 'ajax.php',
+                        data =  {'action': clickBtnValue, 'user_id': userId};
+                    $.post(ajaxurl, data, function (response) {
+                        location.reload(); //reload sign up review page after approve or delete
+                    });
+                });
+
+            });
+
             $(document).on("click", ".open-ProfileModal", function () {
                 var userId = $(this).data('userid');
                 var userFirstName = $(this).data('firstname');
@@ -191,6 +203,8 @@ include("nav_menu.php");
             });
         </script>
         <!-- END OF MODAL -->
+    </div>
+        </div>
     </div>
 </div>
 

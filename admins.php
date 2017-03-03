@@ -16,6 +16,37 @@ include("nav_menu.php");
         include("left_sidebar.php");
         ?>
         <div class="col-sm-8 text-left">
+        <form action="" enctype="multipart/form-data" class="span8 form-inline" method="post">
+            <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td>
+                                <label><b>E-mail of user:</b></label>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Enter email" name="email" required>
+                            </td>
+                        </tr>
+                    </table>
+                <h4>Type a users Email & hit the Add Admin button to add him as a admin</h4>
+            </div>
+            <div class="modal-footer">
+                <button name="signup" id="btnSubmit" type="submit" class="btn btn-success">Add Admin</button>
+            </div>
+        </form>
+            <?php
+            if (isset($_POST["btnSubmit"]) && isset($_POST['submit']) && $_REQUEST['firstName']) {
+                $sql = "Insert
+                into
+                    user(
+                    user_type_id
+                    )
+                values
+                    ('1')";
+
+                $result = mysql_query($sql);
+            }
+            ?>
 
             <table class="table table-bordered">
                 <thead>
@@ -25,6 +56,7 @@ include("nav_menu.php");
                     <th>Phone</th>
                     <th>Area</th>
                     <th>Blood Group</th>
+                    <th>Review</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,9 +76,7 @@ include("nav_menu.php");
                                             LEFT OUTER JOIN batch bt
                                             ON bt.batch_id = u.batch_id
                                           WHERE
-                                          b.blood_group_id='" . $getBloodGroupId . "'
-                                          AND
-                                          u.active_flag = '1'";
+                                          u.user_type_id = 1";
                 $results = mysql_query($strquery);
                 $num = mysql_numrows($results);
 
@@ -102,12 +132,16 @@ include("nav_menu.php");
                                 </a>
                             </figure>
                         </td>
-                        <td><?php  echo $_SESSION['user_email'] ? $phone : 'Log in to see' ?></td>
+                        <td><?php echo $phone ?></td>
                         <td><?php echo $userAreaName ?></td>
+                        <td><a href="#" title="">
+                                <img class="row_image" src="images/system/<?php echo $bloodGroupName ?>.png"
+                                     class="img-responsive voc_list_preview_img" alt="" title="">
+                                <figcaption><?php echo ($bloodGroupName != 'Anonymous') ? $bloodGroupName . 'Ve' : 'Anonymous' ?></figcaption>
+                            </a>
+                        </td>
                         <td>
-                            <img class="row_image" src="images/system/<?php echo $bloodGroupName ?>.png"
-                                 class="img-responsive voc_list_preview_img" alt="" title="">
-                            <figcaption><?php echo ($bloodGroupName != 'Anonymous') ? $bloodGroupName . 'Ve' : 'Anonymous' ?></figcaption>
+                            <button type="submit" id="btnDelete" class="btn btn-danger">Remove Admin</button>
                         </td>
                     </tr>
 
@@ -135,11 +169,7 @@ include("nav_menu.php");
                              title=""></br>
                         <label id="availableToDonate"
                                class="label <?= ($availableToDonate == 1) ? 'label-success' : 'label-danger' ?>"></label></br>
-                        <?php if($_SESSION['user_email']) {?>
-                            <label id="phoneNumber"></label></br>
-                        <?php } else { ?>
-                            <marquee><span style="font-size: 22px; color: red">Sorry, but we won't provide you any detail info about this donor until you are logged in.</span></span></marquee></br></br>
-                        <?php } ?>
+                        <label id="phoneNumber"></label></br>
                         <label>Email: </label><label id="userEmail"></label></br>
                         <label>Area: </label><span id="userareaname"></span></br>
                         <label>Address: </label>
@@ -191,6 +221,8 @@ include("nav_menu.php");
             });
         </script>
         <!-- END OF MODAL -->
+    </div>
+        </div>
     </div>
 </div>
 
