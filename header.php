@@ -1,5 +1,6 @@
 <?php
-error_reporting(0);
+session_cache_limiter(FALSE);
+session_start();
 include("classes/utility/dbconnect.php");
 ?>
 <title>SM Blood Donors</title>
@@ -14,7 +15,7 @@ include("classes/utility/dbconnect.php");
 <link rel="stylesheet" type="text/css" href="engine1/style.css" />
 <script type="text/javascript" src="engine1/jquery.js"></script>
 <!-- End WOWSlider.com HEAD section -->
-
+<link rel="stylesheet" type="text/css" href="styles/main.css" />
 <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {

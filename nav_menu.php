@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -16,6 +13,11 @@ session_start();
                 <?php if($_SESSION['user_type_id'] == 2 || $_SESSION['user_type_id'] == 1){
                 ?>
                 <li class="active "><a href="administration.php">Admin</a></li>
+                <?php
+                }
+                if($_SESSION['user_first_name']){
+                    ?>
+                    <li class="active "><a href="my_profile.php?user_id=<?= $_SESSION['user_id']; ?>"><?= $_SESSION['user_first_name'] ?></a></li>
                 <?php
                 }
                 ?>
@@ -101,9 +103,10 @@ session_start();
                         $_SESSION['user_email'] = $usdata['user_email'];
                         $_SESSION['user_id'] = $usdata['user_id'];
                         $_SESSION['user_type_id'] = $usdata['user_type_id'];
+                        $_SESSION['user_first_name'] = $usdata['user_first_name'];
                         session_write_close();
                         ?>
-                    <script language="JavaScript">window.location="find_blood.php";</script>
+                        <script language="JavaScript">window.location="find_blood.php";</script>
                         <?php
                     }else{ ?>
                     <script language="JavaScript">window.location="login_failed.php";</script>
