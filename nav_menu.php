@@ -10,19 +10,22 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <?php if($_SESSION['user_type_id'] == 2 || $_SESSION['user_type_id'] == 1){
-                ?>
-                <li class="active "><a href="administration.php">Admin</a></li>
+                <?php if ($_SESSION['user_type_id'] == 2 || $_SESSION['user_type_id'] == 1) {
+                    ?>
+                    <li class="active "><a href="administration.php">Admin</a></li>
                 <?php
                 }
-                if($_SESSION['user_first_name']){
+                if ($_SESSION['user_first_name']) {
                     ?>
-                    <li class="active "><a href="my_profile.php?user_id=<?= $_SESSION['user_id']; ?>"><?= $_SESSION['user_first_name'] ?></a></li>
+                    <li class="active "><a
+                            href="my_profile.php?user_id=<?= $_SESSION['user_id']; ?>"><?= $_SESSION['user_first_name'] ?></a>
+                    </li>
                 <?php
                 }
                 ?>
                 <li class="active "><a href="index.php">Home</a></li>
-                <li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown" href="blood_bank.php">Blood Bank<span class="caret"></span></a>
+                <li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown" href="blood_bank.php">Blood
+                        Bank<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="blood_bank.php?group_id=1"> A+ </a></li>
                         <li><a href="blood_bank.php?group_id=2"> A- </a></li>
@@ -40,11 +43,13 @@
                 <li class="active"><a href="contact_us.php">Contact Us</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <?php if(!$_SESSION['user_email']){
+                <?php if (!$_SESSION['user_email']) {
                     ?>
-                <li class="active"><a title="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li class="active"><a title="" data-toggle="modal" data-target="#loginModal"><span
+                                class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 <?php } else { ?>
-                    <li class="active"><a href='log_out.php'><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                    <li class="active"><a href='log_out.php'><span class="glyphicon glyphicon-log-in"></span> Logout</a>
+                    </li>
                 <?php } ?>
             </ul>
         </div>
@@ -59,190 +64,16 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Log In</h4>
             </div>
-                <form action="" method="post">
-                    <div class="modal-body">
-                        <div class="container">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <label><b>E-mail</b></label>
-                                    </td>
-                                    <td>
-                                        <input type="text" placeholder="Enter Email" name="useremail" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label><b>Password</b></label>
-                                    </td>
-                                    <td>
-                                        <input type="password" placeholder="Enter Password" name="password" required>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        </br>
-                        <input type="checkbox" checked="checked"> Remember password
-                        <button name="login" type="submit" class="btn btn-success">Login</button>
-                    </div>
-                    <div class="modal-footer">
-                        <span class="psw">Forgot <a href="#">password?</a></span>
-                        <button type="button" class="btn btn-warning" href="#signupModal" data-toggle="modal" data-dismiss="modal">Sign Up</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
-                </form>
-                <?php
-                if ( isset($_POST['login']) && !empty($_REQUEST['useremail'])) {
-                    $usname = $_REQUEST['useremail'];
-                    $uspass = $_REQUEST['password'];
-                    $qry = "select * from user where user_email='" . ($usname) . "' && user_password='" . ($uspass) . "' && active_flag = '1' ";
-                    $usresult = mysql_query($qry);
-                    $usdata = mysql_fetch_assoc($usresult);
-                    if($usdata['user_email']){
-                        $_SESSION['user_email'] = $usdata['user_email'];
-                        $_SESSION['user_id'] = $usdata['user_id'];
-                        $_SESSION['user_type_id'] = $usdata['user_type_id'];
-                        $_SESSION['user_first_name'] = $usdata['user_first_name'];
-                        session_write_close();
-                        ?>
-                        <script language="JavaScript">window.location="find_blood.php";</script>
-                        <?php
-                    }else{ ?>
-                    <script language="JavaScript">window.location="login_failed.php";</script>
-                    <?php
-                    }
-                    ?>
-                <?php
-                }
-                ?>
-
-            </div>
-        </div>
-    </div>
-</div>
-<!-- END OF MODAL -->
-
-<!-- Sign up Modal Start -->
-<div class="modal fade" id="signupModal" role="dialog">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Sign Up</h4>
-            </div>
-            <form action="" enctype="multipart/form-data" class="span8 form-inline" method="post">
+            <form action="" method="post">
                 <div class="modal-body">
                     <div class="container">
                         <table>
                             <tr>
                                 <td>
-                                    <label><b>First Name</b></label>
-                                </td>
-                                <td>
-                                    <input type="text" placeholder="Enter First Name" name="firstName" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label><b>Last Name</b></label>
-                                </td>
-                                <td>
-                                    <input type="text" placeholder="Enter Last Name" name="lastName" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label><b>SMAMC Batch</b></label>
-                                </td>
-                                <td><select name="batchId" class="form-control" id="batchId" required>
-                                        <?php
-                                        $query = "SELECT DISTINCT batch_id,batch_name FROM batch ORDER BY batch_id";
-                                        $rs = mysql_query($query) or die ('Error submitting');
-                                        while ($row = mysql_fetch_assoc($rs)) {
-                                            print("<option value=\"" . $row["batch_id"] . "\">" . $row["batch_name"] . "</option>");
-                                        }
-                                        ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label><b>Phone</b></label>
-                                </td>
-                                <td>
-                                    <input type="text" placeholder="Enter Phone" name="phone" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label><b>Living Area</b></label>
-                                </td>
-                                <td><select name="areaId" class="form-control" id="areaId" required>
-                                        <?php
-                                        $query = "SELECT DISTINCT user_area_id,user_area_name FROM area ORDER BY user_area_id";
-                                        $rs = mysql_query($query) or die ('Error submitting');
-                                        while ($row = mysql_fetch_assoc($rs)) {
-                                            print("<option value=\"" . $row["user_area_id"] . "\">" . $row["user_area_name"] . "</option>");
-                                        }
-                                        ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label><b>Address</b></label>
-                                </td>
-                                <td>
-                                    <input type="text" placeholder="Enter Address" name="userAddress" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label><b>Blood group</b></label>
-                                </td>
-                                <td>
-                                    <select name="groupId" class="form-control" id="sel1" required>
-                                        <option value="1">A+</option>
-                                        <option value="2">A-</option>
-                                        <option value="3">AB+</option>
-                                        <option value="4">AB-</option>
-                                        <option value="5">B+</option>
-                                        <option value="6">B-</option>
-                                        <option value="7">O+</option>
-                                        <option value="8">O-</option>
-                                        <option value="9">Anonymous</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label><b>Last donated</b></label>
-                                </td>
-                                <td>
-                                    <input type="date" placeholder="Enter Last donation date" name="lastDonated" >
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label><b>Total donated</b></label>
-                                </td>
-                                <td>
-                                    <input type="number" placeholder="Enter total donation" name="totalDonated" > Times
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label><b>Upload photo</b></label>
-                                </td>
-                                <td>
-                                    <input type="file" name="file" id="file" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     <label><b>E-mail</b></label>
                                 </td>
                                 <td>
-                                    <input type="email" placeholder="Enter Email" name="userEmail" required>
+                                    <input type="text" placeholder="Enter Email" name="useremail" required>
                                 </td>
                             </tr>
                             <tr>
@@ -250,46 +81,224 @@
                                     <label><b>Password</b></label>
                                 </td>
                                 <td>
-                                    <input type="password" placeholder="Enter Password" name="userPassword" required>
+                                    <input type="password" placeholder="Enter Password" name="password" required>
                                 </td>
                             </tr>
                         </table>
                     </div>
+
                     </br>
-                    <button name="signup" type="submit" class="btn btn-success">Sign Up</button>
+                    <input type="checkbox" checked="checked"> Remember password
+                    <button name="login" type="submit" class="btn btn-success">Login</button>
                 </div>
                 <div class="modal-footer">
+                    <span class="psw">Forgot <a href="#">password?</a></span>
+                    <button type="button" class="btn btn-warning" href="#signupModal" data-toggle="modal"
+                            data-dismiss="modal">Sign Up
+                    </button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </form>
             <?php
-            if (isset($_POST['signup']) && !empty($_REQUEST['firstName'])) {
-                $post_photo = $_FILES['file']['name'];
-                $post_photo_tmp = $_FILES['file']['tmp_name'];
-                $ext = pathinfo($post_photo, PATHINFO_EXTENSION); // getting image extension
-                if ($ext == 'png' || $ext == 'PNG' || $ext == 'jpg' || $ext == 'jpeg' || $ext == 'JPG' || $ext == 'JPEG' || $ext == 'gif' || $ext == 'GIF') {
-                    if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'JPG' || $ext == 'JPEG') {
-                        ini_set('memory_limit', '-1'); //It will take unlimited memory usage of server
-                        $src = imagecreatefromjpeg($post_photo_tmp);
-                    }
-                    if ($ext == 'png' || $ext == 'PNG') {
-                        ini_set('memory_limit', '-1'); //It will take unlimited memory usage of server
-                        $src = imagecreatefrompng($post_photo_tmp);
-                    }
-                    if ($ext == 'gif' || $ext == 'GIF') {
-                        ini_set('memory_limit', '-1'); //It will take unlimited memory usage of server
-                        $src = imagecreatefromgif($post_photo_tmp);
-                    }
-                    list($width_min, $height_min) = getimagesize($post_photo_tmp);
-                    $newwidth_min = 350;
-                    $newheight_min = ($height_min / $width_min) * $newwidth_min;
-                    $tmp_min = imagecreatetruecolor($newwidth_min, $newheight_min);
-                    imagecopyresampled($tmp_min, $src, 0, 0, 0, 0, $newwidth_min, $newheight_min, $width_min, $height_min);
-                    $newfilename = round(microtime(true)) . '.' . $ext;
-                    imagejpeg($tmp_min, "images/users/" . $newfilename, 80); //copy image in folder//
-                    $photo_name = $newfilename; // new name with path to save in database
+            if (isset($_POST['login']) && !empty($_REQUEST['useremail'])) {
+                $usname = $_REQUEST['useremail'];
+                $uspass = $_REQUEST['password'];
+                $qry = "select * from user where user_email='" . ($usname) . "' && user_password='" . ($uspass) . "' && active_flag = '1' ";
+                $usresult = mysql_query($qry);
+                $usdata = mysql_fetch_assoc($usresult);
+                if ($usdata['user_email']) {
+                    $_SESSION['user_email'] = $usdata['user_email'];
+                    $_SESSION['user_id'] = $usdata['user_id'];
+                    $_SESSION['user_type_id'] = $usdata['user_type_id'];
+                    $_SESSION['user_first_name'] = $usdata['user_first_name'];
+                    session_write_close();
+                    ?>
+                    <script
+                        language="JavaScript">window.location = "my_profile.php?user_id=<?=$usdata['user_id']?>"</script>
+                <?php
+                }else{
+                ?>
+                    <script language="JavaScript">window.location = "login_failed.php";</script>
+                <?php
+                }
+                ?>
+            <?php
+            }
+            ?>
 
-                    $sql = "Insert
+        </div>
+    </div>
+</div>
+</div>
+<!-- END OF MODAL -->
+
+<!-- Sign up Modal Start -->
+<div class="modal fade" id="signupModal" role="dialog">
+<div class="modal-dialog modal-md">
+<div class="modal-content">
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Sign Up</h4>
+</div>
+<form action="" enctype="multipart/form-data" class="span8 form-inline" method="post">
+    <div class="modal-body">
+        <div class="container">
+            <table>
+                <tr>
+                    <td>
+                        <label><b>First Name</b></label>
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Enter First Name" name="firstName" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><b>Last Name</b></label>
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Enter Last Name" name="lastName" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><b>SMAMC Batch</b></label>
+                    </td>
+                    <td><select name="batchId" class="form-control" id="batchId" required>
+                            <?php
+                            $query = "SELECT DISTINCT batch_id,batch_name FROM batch ORDER BY batch_id";
+                            $rs = mysql_query($query) or die ('Error submitting');
+                            while ($row = mysql_fetch_assoc($rs)) {
+                                print("<option value=\"" . $row["batch_id"] . "\">" . $row["batch_name"] . "</option>");
+                            }
+                            ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><b>Phone</b></label>
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Enter Phone" name="phone" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><b>Living Area</b></label>
+                    </td>
+                    <td><select name="areaId" class="form-control" id="areaId" required>
+                            <?php
+                            $query = "SELECT DISTINCT user_area_id,user_area_name FROM area ORDER BY user_area_id";
+                            $rs = mysql_query($query) or die ('Error submitting');
+                            while ($row = mysql_fetch_assoc($rs)) {
+                                print("<option value=\"" . $row["user_area_id"] . "\">" . $row["user_area_name"] . "</option>");
+                            }
+                            ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><b>Address</b></label>
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Enter Address" name="userAddress" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><b>Blood group</b></label>
+                    </td>
+                    <td>
+                        <select name="groupId" class="form-control" id="sel1" required>
+                            <option value="1">A+</option>
+                            <option value="2">A-</option>
+                            <option value="3">AB+</option>
+                            <option value="4">AB-</option>
+                            <option value="5">B+</option>
+                            <option value="6">B-</option>
+                            <option value="7">O+</option>
+                            <option value="8">O-</option>
+                            <option value="9">Anonymous</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><b>Last donated</b></label>
+                    </td>
+                    <td>
+                        <input type="date" placeholder="Enter Last donation date" name="lastDonated">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><b>Total donated</b></label>
+                    </td>
+                    <td>
+                        <input type="number" placeholder="Enter total donation" name="totalDonated"> Times
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><b>Upload photo</b></label>
+                    </td>
+                    <td>
+                        <input type="file" name="file" id="file" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><b>E-mail</b></label>
+                    </td>
+                    <td>
+                        <input type="email" placeholder="Enter Email" name="userEmail" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><b>Password</b></label>
+                    </td>
+                    <td>
+                        <input type="password" placeholder="Enter Password" name="userPassword" required>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        </br>
+        <button name="signup" type="submit" class="btn btn-success">Sign Up</button>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+    </div>
+</form>
+<?php
+if (isset($_POST['signup']) && !empty($_REQUEST['firstName'])) {
+    $post_photo = $_FILES['file']['name'];
+    $post_photo_tmp = $_FILES['file']['tmp_name'];
+    $ext = pathinfo($post_photo, PATHINFO_EXTENSION); // getting image extension
+    if ($ext == 'png' || $ext == 'PNG' || $ext == 'jpg' || $ext == 'jpeg' || $ext == 'JPG' || $ext == 'JPEG' || $ext == 'gif' || $ext == 'GIF') {
+        if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'JPG' || $ext == 'JPEG') {
+            ini_set('memory_limit', '-1'); //It will take unlimited memory usage of server
+            $src = imagecreatefromjpeg($post_photo_tmp);
+        }
+        if ($ext == 'png' || $ext == 'PNG') {
+            ini_set('memory_limit', '-1'); //It will take unlimited memory usage of server
+            $src = imagecreatefrompng($post_photo_tmp);
+        }
+        if ($ext == 'gif' || $ext == 'GIF') {
+            ini_set('memory_limit', '-1'); //It will take unlimited memory usage of server
+            $src = imagecreatefromgif($post_photo_tmp);
+        }
+        list($width_min, $height_min) = getimagesize($post_photo_tmp);
+        $newwidth_min = 350;
+        $newheight_min = ($height_min / $width_min) * $newwidth_min;
+        $tmp_min = imagecreatetruecolor($newwidth_min, $newheight_min);
+        imagecopyresampled($tmp_min, $src, 0, 0, 0, 0, $newwidth_min, $newheight_min, $width_min, $height_min);
+        $newfilename = round(microtime(true)) . '.' . $ext;
+        imagejpeg($tmp_min, "images/users/" . $newfilename, 80); //copy image in folder//
+        $photo_name = $newfilename; // new name with path to save in database
+
+        $sql = "Insert
                 into
                     user(
                     user_first_name,
@@ -320,15 +329,15 @@
                     '$_POST[userPassword]'
 
                     )";
-                    header("Refresh:0; url=signup_succeed.php");
-                    if (!mysql_query($sql)) {
-                        die('Error:' . mysql_error());
-                    }
-                }
-            }
-            ?>
+        header("Refresh:0; url=signup_succeed.php");
+        if (!mysql_query($sql)) {
+            die('Error:' . mysql_error());
+        }
+    }
+}
+?>
 
-        </div>
-    </div>
+</div>
+</div>
 </div>
 <!-- END OF Sign up MODAL -->

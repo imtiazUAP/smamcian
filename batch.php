@@ -29,9 +29,9 @@ include("nav_menu.php");
                 </thead>
                 <tbody>
 
-                        <?php
-                        $getBatchId = $_GET["batch_id"];
-                        $strquery = "SELECT
+                <?php
+                $getBatchId = $_GET["batch_id"];
+                $strquery = "SELECT
                                           u.*,
                                           a.user_area_name,
                                           b.blood_group_name
@@ -44,73 +44,72 @@ include("nav_menu.php");
                                           u.batch_id='" . $getBatchId . "'
                                           AND
                                           u.active_flag = '1'";
-                        $results = mysql_query($strquery);
-                        $num = mysql_numrows($results);
+                $results = mysql_query($strquery);
+                $num = mysql_numrows($results);
 
+                $i = 0;
+                while ($i < $num) {
+                    $userId = mysql_result($results, $i, "user_id");
+                    $userFirstName = mysql_result($results, $i, "user_first_name");
+                    $userLastName = mysql_result($results, $i, "user_last_name");
+                    $photoUrl = mysql_result($results, $i, "photo_url");
+                    $phone = mysql_result($results, $i, "phone");
+                    $bloodGroupId = mysql_result($results, $i, "blood_group_id");
+                    $bloodGroupName = mysql_result($results, $i, "blood_group_name");
+                    $userAddress = mysql_result($results, $i, "user_address");
+                    $userAreaName = mysql_result($results, $i, "user_area_name");
+                    $availableToDonate = mysql_result($results, $i, "available_to_donate");
+                    $lastDonated = mysql_result($results, $i, "last_donated");
+                    $totalDonated = mysql_result($results, $i, "total_donated");
+                    $batchId = mysql_result($results, $i, "batch_id");
+                    $userTypeId = mysql_result($results, $i, "user_type_id");
+                    $userEmail = mysql_result($results, $i, "user_email");
+                    ?>
 
-                        $i = 0;
-                        while ($i < $num) {
-                            $userId = mysql_result($results, $i, "user_id");
-                            $userFirstName = mysql_result($results, $i, "user_first_name");
-                            $userLastName = mysql_result($results, $i, "user_last_name");
-                            $photoUrl = mysql_result($results, $i, "photo_url");
-                            $phone = mysql_result($results, $i, "phone");
-                            $bloodGroupId = mysql_result($results, $i, "blood_group_id");
-                            $bloodGroupName = mysql_result($results, $i, "blood_group_name");
-                            $userAddress = mysql_result($results, $i, "user_address");
-                            $userAreaName = mysql_result($results, $i, "user_area_name");
-                            $availableToDonate = mysql_result($results, $i, "available_to_donate");
-                            $lastDonated = mysql_result($results, $i, "last_donated");
-                            $totalDonated = mysql_result($results, $i, "total_donated");
-                            $batchId = mysql_result($results, $i, "batch_id");
-                            $userTypeId = mysql_result($results, $i, "user_type_id");
-                            $userEmail = mysql_result($results, $i, "user_email");
-                            ?>
+                    <tr>
+                        <td>
+                            <?= $userId ?>
+                        </td>
+                        <td>
+                            <figure>
+                                <a class="open-ProfileModal" title="" data-toggle="modal"
+                                   data-userid="<?php echo $userId; ?>"
+                                   data-firstname="<?php echo $userFirstName; ?>"
+                                   data-lastname="<?php echo $userLastName; ?>"
+                                   data-photourl="<?php echo $photoUrl; ?>"
+                                   data-phonenumber="<?php echo $phone; ?>"
+                                   data-bloodgroupid="<?php echo $bloodGroupId; ?>"
+                                   data-bloodgroupname="<?php echo $bloodGroupName; ?>"
+                                   data-useraddress="<?php echo $userAddress; ?>"
+                                   data-userareaname="<?php echo $userAreaName; ?>"
+                                   data-availabletodonate="<?php echo $availableToDonate; ?>"
+                                   data-lastdonated="<?php echo $lastDonated; ?>"
+                                   data-totaldonated="<?php echo $totalDonated; ?>"
+                                   data-batchid="<?php echo $batchId; ?>"
+                                   data-batchname="<?php echo $batchName; ?>"
+                                   data-useremail="<?php echo $userEmail; ?>"
 
-                            <tr>
-                                <td>
-                                    <?= $userId ?>
-                                </td>
-                                <td>
-                                    <figure>
-                                        <a class="open-ProfileModal" title="" data-toggle="modal"
-                                           data-userid="<?php echo $userId; ?>"
-                                           data-firstname="<?php echo $userFirstName; ?>"
-                                           data-lastname="<?php echo $userLastName; ?>"
-                                           data-photourl="<?php echo $photoUrl; ?>"
-                                           data-phonenumber="<?php echo $phone; ?>"
-                                           data-bloodgroupid="<?php echo $bloodGroupId; ?>"
-                                           data-bloodgroupname="<?php echo $bloodGroupName; ?>"
-                                           data-useraddress="<?php echo $userAddress; ?>"
-                                           data-userareaname="<?php echo $userAreaName; ?>"
-                                           data-availabletodonate="<?php echo $availableToDonate; ?>"
-                                           data-lastdonated="<?php echo $lastDonated; ?>"
-                                           data-totaldonated="<?php echo $totalDonated; ?>"
-                                           data-batchid="<?php echo $batchId; ?>"
-                                           data-batchname="<?php echo $batchName; ?>"
-                                           data-useremail="<?php echo $userEmail; ?>"
-
-                                           data-target="#myModal" href="#myModal">
-                                            <img class="row_image" src="images/users/<?php echo $photoUrl ?>"
-                                                 class="img-responsive voc_list_preview_img" alt="" title="">
-                                            <figcaption><?php echo $userFirstName ?></figcaption>
-
-                                        </a>
-                                    </figure>
-                                </td>
-                                <td><?php  echo $_SESSION['user_email'] ? $phone : 'Log in to see' ?></td>
-                                <td><?php echo $userAreaName ?></td>
-                                <td>
-                                    <img class="row_image" src="images/system/<?php echo $bloodGroupName ?>.png"
+                                   data-target="#myModal" href="#myModal">
+                                    <img class="row_image" src="images/users/<?php echo $photoUrl ?>"
                                          class="img-responsive voc_list_preview_img" alt="" title="">
-                                    <figcaption><?php echo ($bloodGroupName != 'Anonymous') ? $bloodGroupName . 'Ve' : 'Anonymous' ?></figcaption>
-                                </td>
-                            </tr>
+                                    <figcaption><?php echo $userFirstName ?></figcaption>
 
-                            <?php
-                            $i++;
-                        }
-                        ?>
+                                </a>
+                            </figure>
+                        </td>
+                        <td><?php echo $_SESSION['user_email'] ? $phone : 'Log in to see' ?></td>
+                        <td><?php echo $userAreaName ?></td>
+                        <td>
+                            <img class="row_image" src="images/system/<?php echo $bloodGroupName ?>.png"
+                                 class="img-responsive voc_list_preview_img" alt="" title="">
+                            <figcaption><?php echo ($bloodGroupName != 'Anonymous') ? $bloodGroupName . 'Ve' : 'Anonymous' ?></figcaption>
+                        </td>
+                    </tr>
+
+                    <?php
+                    $i++;
+                }
+                ?>
                 </tbody>
             </table>
 
@@ -132,10 +131,11 @@ include("nav_menu.php");
                              title=""></br>
                         <label id="availableToDonate"
                                class="label <?= ($availableToDonate == 1) ? 'label-success' : 'label-danger' ?>"></label></br>
-                        <?php if($_SESSION['user_email']) {?>
+                        <?php if ($_SESSION['user_email']) { ?>
                             <label id="phoneNumber"></label></br>
                         <?php } else { ?>
-                            <marquee><span style="font-size: 22px; color: red">Sorry, but we won't provide you any detail info about this donor until you are logged in.</span></span></marquee></br>
+                            <marquee><span style="font-size: 22px; color: red">Sorry, but we won't provide you any detail info about this donor until you are logged in.</span></span>
+                            </marquee></br>
                         <?php } ?>
                         <label>Email: </label><label id="userEmail"></label></br>
                         <label>Area: </label><span id="userareaname"></span></br>

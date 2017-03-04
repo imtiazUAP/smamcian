@@ -50,7 +50,6 @@ include("nav_menu.php");
                 $results = mysql_query($strquery);
                 $num = mysql_numrows($results);
 
-
                 $i = 0;
                 while ($i < $num) {
                     $userId = mysql_result($results, $i, "user_id");
@@ -102,7 +101,7 @@ include("nav_menu.php");
                                 </a>
                             </figure>
                         </td>
-                        <td><?php  echo $_SESSION['user_email'] ? $phone : 'Log in to see' ?></td>
+                        <td><?php echo $_SESSION['user_email'] ? $phone : 'Log in to see' ?></td>
                         <td><?php echo $userAreaName ?></td>
                         <td>
                             <img class="row_image" src="images/system/<?php echo $bloodGroupName ?>.png"
@@ -135,10 +134,11 @@ include("nav_menu.php");
                              title=""></br>
                         <label id="availableToDonate"
                                class="label <?= ($availableToDonate == 1) ? 'label-success' : 'label-danger' ?>"></label></br>
-                        <?php if($_SESSION['user_email']) {?>
+                        <?php if ($_SESSION['user_email']) { ?>
                             <label id="phoneNumber"></label></br>
                         <?php } else { ?>
-                            <marquee><span style="font-size: 22px; color: red">Sorry, but we won't provide you any detail info about this donor until you are logged in.</span></span></marquee></br></br>
+                            <marquee><span style="font-size: 22px; color: red">Sorry, but we won't provide you any detail info about this donor until you are logged in.</span></span>
+                            </marquee></br></br>
                         <?php } ?>
                         <label>Email: </label><label id="userEmail"></label></br>
                         <label>Area: </label><span id="userareaname"></span></br>

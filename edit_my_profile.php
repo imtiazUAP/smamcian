@@ -10,7 +10,7 @@
 <body>
 <?php
 include("nav_menu.php");
-if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
+if ($_SESSION['user_id'] == $_GET["user_id"] || $_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
     ?>
 
     <div class="container-fluid text-center">
@@ -19,8 +19,46 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
     include("left_sidebar.php");
     ?>
     <div class="col-sm-8 text-left">
+    <?php
+    $userId = $_GET["user_id"];
+    $strquery = "SELECT
+            u.*,
+            a.user_area_name,
+            b.blood_group_name,
+            bt.batch_name
+            FROM USER AS u
+            LEFT OUTER JOIN blood_group b
+            ON b.blood_group_id = u.blood_group_id
+            LEFT OUTER JOIN AREA a
+            ON a.user_area_id = u.user_area_id
+            LEFT OUTER JOIN batch bt
+            ON bt.batch_id = u.batch_id
+            WHERE
+            u.user_id = '$userId'";
+    $results = mysql_query($strquery);
+    $num = mysql_numrows($results);
+
+    $i = 0;
+    $userId = mysql_result($results, $i, "user_id");
+    $userFirstName = mysql_result($results, $i, "user_first_name");
+    $userLastName = mysql_result($results, $i, "user_last_name");
+    $photoUrl = mysql_result($results, $i, "photo_url");
+    $phone = mysql_result($results, $i, "phone");
+    $bloodGroupId = mysql_result($results, $i, "blood_group_id");
+    $bloodGroupName = mysql_result($results, $i, "blood_group_name");
+    $userAddress = mysql_result($results, $i, "user_address");
+    $userAreaId = mysql_result($results, $i, "user_area_id");
+    $userAreaName = mysql_result($results, $i, "user_area_name");
+    $availableToDonate = mysql_result($results, $i, "available_to_donate");
+    $lastDonated = mysql_result($results, $i, "last_donated");
+    $totalDonated = mysql_result($results, $i, "total_donated");
+    $batchId = mysql_result($results, $i, "batch_id");
+    $batchName = mysql_result($results, $i, "batch_name");
+    $userTypeId = mysql_result($results, $i, "user_type_id");
+    $userEmail = mysql_result($results, $i, "user_email");
+    ?>
     <div class="modal-header">
-        <h4 class="modal-title">Sign Up</h4>
+        <h4 class="modal-title">Edit Profile</h4>
     </div>
     <form action="" enctype="multipart/form-data" class="span8 form-inline" method="post">
         <div class="modal-body">
@@ -31,7 +69,8 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>First Name</b></label>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter First Name" name="firstName" required>
+                            <input type="text" placeholder="Enter First Name" name="firstName"
+                                   value="<?= $userFirstName ?>" required>
                         </td>
                     </tr>
                     <tr>
@@ -39,21 +78,8 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>Last Name</b></label>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter Last Name" name="lastName" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label><b>SMAMC Batch</b></label>
-                        </td>
-                        <td><select name="batchId" class="form-control" id="batchId" required>
-                                <?php
-                                $query = "SELECT DISTINCT batch_id,batch_name FROM batch ORDER BY batch_id";
-                                $rs = mysql_query($query) or die ('Error submitting');
-                                while ($row = mysql_fetch_assoc($rs)) {
-                                    print("<option value=\"" . $row["batch_id"] . "\">" . $row["batch_name"] . "</option>");
-                                }
-                                ?>
+                            <input type="text" placeholder="Enter Last Name" name="lastName"
+                                   value="<?= $userLastName ?>" required>
                         </td>
                     </tr>
                     <tr>
@@ -61,19 +87,25 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>Phone</b></label>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter Phone" name="phone" required>
+                            <input type="text" placeholder="Enter Phone" value="<?= $phone ?>" name="phone" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label><b>Living Area</b></label>
                         </td>
-                        <td><select name="areaId" class="form-control" id="areaId" required>
+                        <td><select name="areaId" class="form-control" id="areaId" value="<?= $userFirstName ?>"
+                                    required>
                                 <?php
                                 $query = "SELECT DISTINCT user_area_id,user_area_name FROM area ORDER BY user_area_id";
                                 $rs = mysql_query($query) or die ('Error submitting');
-                                while ($row = mysql_fetch_assoc($rs)) {
-                                    print("<option value=\"" . $row["user_area_id"] . "\">" . $row["user_area_name"] . "</option>");
+                                while ($rows = mysql_fetch_assoc($rs)) {
+                                    if ($userAreaId == $rows["user_area_id"]) {
+                                        $selected = 'selected="selected"';
+                                    } else {
+                                        $selected = '';
+                                    }
+                                    print("<option value=\"" . $rows["user_area_id"] . "\" " . $selected . "  >" . $rows["user_area_name"] . "</option>");
                                 }
                                 ?>
                         </td>
@@ -83,25 +115,8 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>Address</b></label>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter Address" name="userAddress" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label><b>Blood group</b></label>
-                        </td>
-                        <td>
-                            <select name="groupId" class="form-control" id="sel1" required>
-                                <option value="1">A+</option>
-                                <option value="2">A-</option>
-                                <option value="3">AB+</option>
-                                <option value="4">AB-</option>
-                                <option value="5">B+</option>
-                                <option value="6">B-</option>
-                                <option value="7">O+</option>
-                                <option value="8">O-</option>
-                                <option value="9">Anonymous</option>
-                            </select>
+                            <input type="text" placeholder="Enter Address" name="userAddress"
+                                   value="<?= $userAddress ?>" required>
                         </td>
                     </tr>
                     <tr>
@@ -109,7 +124,8 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>Last donated</b></label>
                         </td>
                         <td>
-                            <input type="date" placeholder="Enter Last donation date" name="lastDonated">
+                            <input type="date" placeholder="Enter Last donation date" name="lastDonated"
+                                   value="<?php print(date("Y-m-d")); ?>">
                         </td>
                     </tr>
                     <tr>
@@ -117,7 +133,8 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>Total donated</b></label>
                         </td>
                         <td>
-                            <input type="number" placeholder="Enter total donation" name="totalDonated"> Times
+                            <input type="number" placeholder="Enter total donation" name="totalDonated"
+                                   value="<?= $totalDonated ?>"> Times
                         </td>
                     </tr>
                     <tr>
@@ -133,7 +150,8 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>E-mail</b></label>
                         </td>
                         <td>
-                            <input type="email" placeholder="Enter Email" name="userEmail" required>
+                            <input type="email" placeholder="Enter Email" name="userEmail" value="<?= $userEmail ?>"
+                                   required>
                         </td>
                     </tr>
                     <tr>
@@ -149,11 +167,11 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
             </br>
         </div>
         <div class="modal-footer">
-            <button name="signup" id="btnSubmit" type="submit" class="btn btn-success">Add User</button>
+            <button name="btnSubmit" id="btnSubmit" type="submit" class="btn btn-success">Update Info</button>
         </div>
     </form>
     <?php
-    if (isset($_POST["btnSubmit"]) && isset($_POST['submit']) && $_REQUEST['firstName']) {
+    if (isset($_POST["btnSubmit"]) && $_REQUEST['userEmail']) {
         $post_photo = $_FILES['file']['name'];
         $post_photo_tmp = $_FILES['file']['tmp_name'];
         $ext = pathinfo($post_photo, PATHINFO_EXTENSION); // getting image extension
@@ -179,46 +197,28 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
             imagejpeg($tmp_min, "images/users/" . $newfilename, 80); //copy image in folder//
             $photo_name = $newfilename; // new name with path to save in database
 
-            $sql = "Insert
-                into
-                    user(
-                    user_first_name,
-                    user_last_name,
-                    phone,
-                    user_area_id,
-                    user_address,
-                    blood_group_id,
-                    last_donated,
-                    total_donated,
-                    batch_id,
-                    photo_url,
-                    active_flag,
-                    user_email,
-                    user_password,
-                    added_by
-                    )
-                values
-                    ('$_POST[firstName]',
-                    '$_POST[lastName]',
-                    '$_POST[phone]',
-                    '$_POST[areaId]',
-                    '$_POST[userAddress]',
-                    '$_POST[groupId]',
-                    '$_POST[lastDonated]',
-                    '$_POST[totalDonated]',
-                    '$_POST[batchId]',
-                    '$photo_name',
-                    '1',
-                    '$_POST[userEmail]',
-                    '$_POST[userPassword]',
-                    '$_SESSION[user_id]'
-                    )";
+            if ($photoUrl) {
+                unlink('images/users/' . $photoUrl);
+            }
 
-            $result = mysql_query($sql);
+            $strquery = "UPDATE
+                    user
+                    SET
+                    user_first_name= '" . ($_POST['firstName']) . "',
+                    user_last_name= '" . $_REQUEST['lastName'] . "',
+                    phone= '" . $_REQUEST['phone'] . "',
+                    user_area_id= '" . $_REQUEST['areaId'] . "',
+                    last_donated= '" . $_REQUEST['lastDonated'] . "',
+                    total_donated= '" . $_REQUEST['totalDonated'] . "',
+                    photo_url='" . $photo_name . "',
+                    user_email= '" . $_REQUEST['userEmail'] . "',
+                    user_password= '" . $_REQUEST['userPassword'] . "'
+                     WHERE user_id='" . $userId . "'";
+            $result = mysql_query($strquery);
 
             if ($result) {
                 ?>
-                <div><h3>User added, add next one...</h3></div>
+                <script language="JavaScript">window.location = "my_profile.php?user_id=<?= $userId ?>";</script>
             <?php
             } else {
                 die('Error:' . mysql_error());

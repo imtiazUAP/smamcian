@@ -1,9 +1,9 @@
 <?php
 error_reporting(0);
-session_start() ;
-session_destroy() ;
+session_start();
+session_destroy();
 
 ?>
 <script language="JavaScript">
-    window.location="index.php";
+    window.location = "index.php";
 </script>

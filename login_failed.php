@@ -17,13 +17,39 @@ include("nav_menu.php");
         ?>
         <div class="col-sm-8 text-left">
 
-            <marquee><span style="font-size: 22px; color: red">Login Failed, Please try again or if you forgot your password then as admins to reset your password</span></span></marquee>
+            <marquee><span style="font-size: 22px; color: red">Login Failed, Please try again or if you forgot your password then as admins to reset your password</span></span>
+            </marquee>
 
-            <h1>Welcome</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <hr>
-            <h3>Test</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est </p>
+            <center>
+                <div style="">
+                    <img src="images/system/login_failed.png" width="20%" alt="Login failed">
+                </div>
+            </center>
+            <div>
+                <h4 style="color: red">যে যে কারনে সাইন ইন ফেইল হতে পারে...</h4>
+
+                <div>
+                    <ol>
+                        <li>আপনার ইমেইল অথবা পাসওয়ার্ড টাইপ করতে ভুল হয়েছে</li>
+                        <li>আপনি আপনার পাসওয়ার্ড ভুলে গেছেন</li>
+                        <li>আপনি smamcian এর রেজিস্টার্ড মেম্বার নন</li>
+                        <li>আপনার মেম্বারশীপ এখনো এডমিন মহোদয় একসেপ্ট করেন নি</li>
+                    </ol>
+                </div>
+            </div>
+            <br>
+
+            <div>
+                <h4 style="color: green">যেভাবে নতুন পাসওয়ার্ড পেতে পারেন</h4>
+
+                <div>
+                    <ol>
+                        <li>ইমেইল এবং পাসওয়ার্ড আবার সঠিকভাবে দিয়ে চেস্টা করুনয়েছে</li>
+                        <li>এডমিনদের কাওকে আপনার নতুন পাসওয়ার্ড সেট করার জন্য অনুরোধ করুন</li>
+                        <li>এখনো সাইন-আপ না করে থাকলে সাইন-আপ করুন এবং এডমিন এপ্রুভালের জন্যে অপেক্ষা করুন</li>
+                    </ol>
+                </div>
+            </div>
         </div>
         <?php
         include("right_sidebar.php");
