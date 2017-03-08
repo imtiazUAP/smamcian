@@ -1,3 +1,7 @@
+<?php
+session_start();
+//error_reporting(0);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +34,7 @@ include("nav_menu.php");
                 <tbody>
 
                 <?php
-                $getBloodGroupId = $_GET["group_id"];
+                $getBatchId = $_GET["batch_id"];
                 $strquery = "SELECT
                                           u.*,
                                           a.user_area_name,
@@ -41,11 +45,9 @@ include("nav_menu.php");
                                             ON b.blood_group_id = u.blood_group_id
                                           LEFT OUTER JOIN area a
                                             ON a.user_area_id = u.user_area_id
-                                            LEFT OUTER JOIN batch bt
+                                          LEFT OUTER JOIN batch bt
                                             ON bt.batch_id = u.batch_id
                                           WHERE
-                                          b.blood_group_id='" . $getBloodGroupId . "'
-                                          AND
                                           u.active_flag = '1'";
                 $results = mysql_query($strquery);
                 $num = mysql_num_rows($results);
@@ -71,6 +73,7 @@ include("nav_menu.php");
                     ?>
 
                     <tr>
+                        <?php if($_SESSION['user_type_id'] != 2 && $_SESSION['user_type_id'] != 1){ ?>
                         <td>
                             <figure>
                                 <a class="open-ProfileModal" title="" data-toggle="modal"
@@ -98,6 +101,11 @@ include("nav_menu.php");
                                 </a>
                             </figure>
                         </td>
+                        <?php }else{ ?>
+                        <td>
+                        <a href="my_profile.php?user_id=<?= $userId; ?>"><img class="row_image" src="images/users/<?php echo $photoUrl ?>" class="img-responsive voc_list_preview_img" alt="" title=""> <figcaption><?php echo $userFirstName ?></figcaption></a>
+                    	</td>
+                        <?php } ?>
                         <td><?php echo $_SESSION['user_email'] ? $phone : 'Log in to see' ?></td>
                         <td><span class="<?php echo $availableToDonate ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove' ?>"><?php echo $availableToDonate ? 'Yes' : 'No' ?></span></td>
                         <td><?php echo $userAreaName ?></td>
@@ -119,6 +127,7 @@ include("nav_menu.php");
         <?php
         include("right_sidebar.php");
         ?>
+
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog modal-md">
@@ -136,7 +145,7 @@ include("nav_menu.php");
                             <label id="phoneNumber"></label></br>
                         <?php } else { ?>
                             <marquee><span style="font-size: 22px; color: red">Sorry, but we won't provide you any detail info about this donor until you are logged in.</span></span>
-                            </marquee></br></br>
+                            </marquee></br>
                         <?php } ?>
                         <label>Email: </label><label id="userEmail"></label></br>
                         <label>Area: </label><span id="userareaname"></span></br>
