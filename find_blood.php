@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +25,7 @@ include("left_sidebar.php");
             <tr>
                 <td><label>Select Blood Group:</label></td>
                 <td style="padding-right: 20px;">
-                    <select name="blood_group_id" id="blood_group_id" selected="">
+                    <select class="form-control" name="blood_group_id" id="blood_group_id" selected="">
                         <?php
 
                         $query = "SELECT DISTINCT blood_group_id, blood_group_name FROM blood_group";
@@ -40,7 +43,7 @@ include("left_sidebar.php");
                 </td>
                 <td><label>Select Area:</label></td>
                 <td style="padding-right: 20px;">
-                    <select name="user_area_id" id="user_area_id" selected="">
+                    <select  class="form-control" name="user_area_id" id="user_area_id" selected="">
                         <?php
 
                         $query = "SELECT DISTINCT user_area_id, user_area_name FROM area";
@@ -68,9 +71,9 @@ include("left_sidebar.php");
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>Phone</th>
+            <th>Available?</th>
             <th>Area</th>
             <th>Blood Group</th>
         </tr>
@@ -84,10 +87,10 @@ include("left_sidebar.php");
                                           a.user_area_name,
                                           b.blood_group_name,
                                           bt.batch_name
-                                        FROM USER AS u
+                                        FROM user AS u
                                           LEFT OUTER JOIN blood_group b
                                             ON b.blood_group_id = u.blood_group_id
-                                          LEFT OUTER JOIN AREA a
+                                          LEFT OUTER JOIN area a
                                             ON a.user_area_id = u.user_area_id
                                             LEFT OUTER JOIN batch bt
                                             ON bt.batch_id = u.batch_id
@@ -98,7 +101,7 @@ include("left_sidebar.php");
                                           AND
                                           u.active_flag = '1'";
             $results = mysql_query($strquery);
-            $num = mysql_numrows($results);
+            $num = mysql_num_rows($results);
 
 
             $i = 0;
@@ -122,9 +125,6 @@ include("left_sidebar.php");
                 ?>
 
                 <tr>
-                    <td>
-                        <?= $userId ?>
-                    </td>
                     <td>
                         <figure>
                             <a class="open-ProfileModal" title="" data-toggle="modal"
@@ -153,6 +153,7 @@ include("left_sidebar.php");
                         </figure>
                     </td>
                     <td><?php echo $_SESSION['user_email'] ? $phone : 'Log in to see' ?></td>
+                    <td><span class="<?php echo $availableToDonate ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove' ?>"><?php echo $availableToDonate ? 'Yes' : 'No' ?></span></td>
                     <td><?php echo $userAreaName ?></td>
                     <td>
                         <img class="row_image" src="images/system/<?php echo $bloodGroupName ?>.png"

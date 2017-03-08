@@ -31,7 +31,7 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>First Name</b></label>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter First Name" name="firstName" required>
+                            <input type="text" class="form-control" placeholder="Enter First Name" name="firstName" required>
                         </td>
                     </tr>
                     <tr>
@@ -39,7 +39,7 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>Last Name</b></label>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter Last Name" name="lastName" required>
+                            <input type="text" class="form-control" placeholder="Enter Last Name" name="lastName" required>
                         </td>
                     </tr>
                     <tr>
@@ -61,7 +61,7 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>Phone</b></label>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter Phone" name="phone" required>
+                            <input type="text" class="form-control" placeholder="Enter Phone" name="phone" required>
                         </td>
                     </tr>
                     <tr>
@@ -83,7 +83,7 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>Address</b></label>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter Address" name="userAddress" required>
+                            <input type="text" class="form-control"placeholder="Enter Address" name="userAddress" required>
                         </td>
                     </tr>
                     <tr>
@@ -109,7 +109,7 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>Last donated</b></label>
                         </td>
                         <td>
-                            <input type="date" placeholder="Enter Last donation date" name="lastDonated">
+                            <input type="date" class="form-control" placeholder="Enter Last donation date" name="lastDonated">
                         </td>
                     </tr>
                     <tr>
@@ -117,7 +117,7 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>Total donated</b></label>
                         </td>
                         <td>
-                            <input type="number" placeholder="Enter total donation" name="totalDonated"> Times
+                            <input type="number" class="form-control" placeholder="Enter total donation" name="totalDonated"> Times
                         </td>
                     </tr>
                     <tr>
@@ -125,7 +125,7 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>Upload photo</b></label>
                         </td>
                         <td>
-                            <input type="file" name="file" id="file" required>
+                            <input type="file" class="form-control" name="file" id="file" required>
                         </td>
                     </tr>
                     <tr>
@@ -133,7 +133,7 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>E-mail</b></label>
                         </td>
                         <td>
-                            <input type="email" placeholder="Enter Email" name="userEmail" required>
+                            <input type="email" class="form-control" placeholder="Enter Email" name="userEmail" required>
                         </td>
                     </tr>
                     <tr>
@@ -141,7 +141,7 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>Password</b></label>
                         </td>
                         <td>
-                            <input type="password" placeholder="Enter Password" name="userPassword" required>
+                            <input type="password" class="form-control" placeholder="Enter Password" name="userPassword" required>
                         </td>
                     </tr>
                 </table>

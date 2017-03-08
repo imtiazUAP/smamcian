@@ -1,10 +1,12 @@
+<?php
+session_start();
+error_reporting(0);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <?php
-    error_reporting(0);
-    session_start();
-    include("header.php");
+include("header.php");
     ?>
 </head>
 <body>
@@ -24,6 +26,8 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
             <li class="active "><a href="add_user.php">Add user</a></li>
             <br>
             <li class="active "><a href="review_signup.php">Review sign up</a></li>
+            <br>
+            <li class="active "><a href="all_donors.php">All donors</a></li>
             <br>
             <?php if ($_SESSION['user_type_id'] == 1) {
                 ?>

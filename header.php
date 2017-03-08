@@ -1,9 +1,9 @@
 <?php
 session_cache_limiter(FALSE);
-session_start();
+//session_start();
 include("classes/utility/dbconnect.php");
 ?>
-<title>SM Blood Donors</title>
+<title>smamcian</title>
 <link rel="shortcut icon" href="images/system/blood_drop.ico"/>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

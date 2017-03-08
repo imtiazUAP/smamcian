@@ -1,3 +1,7 @@
+<?php
+session_start();
+//error_reporting(0);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,10 +23,9 @@ include("nav_menu.php");
 
             <table class="table table-bordered">
                 <thead>
-                <tr>
-                    <th>Id</th>
                     <th>Name</th>
                     <th>Phone</th>
+                    <th>Available?</th>
                     <th>Area</th>
                     <th>Blood Group</th>
                 </tr>
@@ -34,18 +37,21 @@ include("nav_menu.php");
                 $strquery = "SELECT
                                           u.*,
                                           a.user_area_name,
-                                          b.blood_group_name
-                                        FROM USER AS u
+                                          b.blood_group_name,
+                                          bt.batch_name
+                                        FROM user AS u
                                           LEFT OUTER JOIN blood_group b
                                             ON b.blood_group_id = u.blood_group_id
-                                          LEFT OUTER JOIN AREA a
+                                          LEFT OUTER JOIN area a
                                             ON a.user_area_id = u.user_area_id
+                                          LEFT OUTER JOIN batch bt
+                                            ON bt.batch_id = u.batch_id
                                           WHERE
                                           u.batch_id='" . $getBatchId . "'
                                           AND
                                           u.active_flag = '1'";
                 $results = mysql_query($strquery);
-                $num = mysql_numrows($results);
+                $num = mysql_num_rows($results);
 
                 $i = 0;
                 while ($i < $num) {
@@ -62,14 +68,12 @@ include("nav_menu.php");
                     $lastDonated = mysql_result($results, $i, "last_donated");
                     $totalDonated = mysql_result($results, $i, "total_donated");
                     $batchId = mysql_result($results, $i, "batch_id");
+                    $batchName = mysql_result($results, $i, "batch_name");
                     $userTypeId = mysql_result($results, $i, "user_type_id");
                     $userEmail = mysql_result($results, $i, "user_email");
                     ?>
 
                     <tr>
-                        <td>
-                            <?= $userId ?>
-                        </td>
                         <td>
                             <figure>
                                 <a class="open-ProfileModal" title="" data-toggle="modal"
@@ -98,6 +102,7 @@ include("nav_menu.php");
                             </figure>
                         </td>
                         <td><?php echo $_SESSION['user_email'] ? $phone : 'Log in to see' ?></td>
+                        <td><span class="<?php echo $availableToDonate ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove' ?>"><?php echo $availableToDonate ? 'Yes' : 'No' ?></span></td>
                         <td><?php echo $userAreaName ?></td>
                         <td>
                             <img class="row_image" src="images/system/<?php echo $bloodGroupName ?>.png"

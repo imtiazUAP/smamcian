@@ -1,3 +1,7 @@
+<?php
+session_start();
+error_reporting(0);
+?>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -10,22 +14,20 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <?php if ($_SESSION['user_type_id'] == 2 || $_SESSION['user_type_id'] == 1) {
-                    ?>
-                    <li class="active "><a href="administration.php">Admin</a></li>
+                <?php if ($_SESSION['user_type_id'] == 2 || $_SESSION['user_type_id'] == 1) { ?>
+                    <li class="active"><a href="administration.php"><span class="glyphicon glyphicon-pencil"></span>Control Panel</a></li>
                 <?php
                 }
                 if ($_SESSION['user_first_name']) {
                     ?>
                     <li class="active "><a
-                            href="my_profile.php?user_id=<?= $_SESSION['user_id']; ?>"><?= $_SESSION['user_first_name'] ?></a>
+                            href="my_profile.php?user_id=<?= $_SESSION['user_id']; ?>"><span class="glyphicon glyphicon-user"></span><?= $_SESSION['user_first_name'] ?></a>
                     </li>
                 <?php
                 }
                 ?>
-                <li class="active "><a href="index.php">Home</a></li>
-                <li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown" href="blood_bank.php">Blood
-                        Bank<span class="caret"></span></a>
+                <li class="active "><a href="index.php"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+                <li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown" href="blood_bank.php">Donors by group<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="blood_bank.php?group_id=1"> A+ </a></li>
                         <li><a href="blood_bank.php?group_id=2"> A- </a></li>
@@ -38,9 +40,14 @@
                         <li><a href="blood_bank.php?group_id=9"> Anonymous </a></li>
                     </ul>
                 </li>
-                <li class="active"><a href="find_blood.php">Find Blood</a></li>
+                <li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown" href="b#"><span class="glyphicon glyphicon-search"></span>Find Blood<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="find_blood.php"> Area Wise </a></li>
+                        <li><a href="all_donors.php"> All Donors </a></li>
+                    </ul>
+                </li>
                 <li class="active"><a href="about.php">About</a></li>
-                <li class="active"><a href="contact_us.php">Contact Us</a></li>
+                <li class="active"><a href="contact_us.php"><span class="glyphicon glyphicon-earphone"></span>Contact Us</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <?php if (!$_SESSION['user_email']) {
@@ -92,7 +99,7 @@
                     <button name="login" type="submit" class="btn btn-success">Login</button>
                 </div>
                 <div class="modal-footer">
-                    <span class="psw">Forgot <a href="#">password?</a></span>
+                    <span class="psw">Forgot <a href="login_failed.php">password?</a></span>
                     <button type="button" class="btn btn-warning" href="#signupModal" data-toggle="modal"
                             data-dismiss="modal">Sign Up
                     </button>
@@ -116,9 +123,10 @@
                     <script
                         language="JavaScript">window.location = "my_profile.php?user_id=<?=$usdata['user_id']?>"</script>
                 <?php
-                }else{
+                }else if(isset($_POST['login']) && !$usdata['user_email']){
                 ?>
-                    <script language="JavaScript">window.location = "login_failed.php";</script>
+			<script language="JavaScript">window.location = "login_failed.php?user_id=<?=$usdata['user_id']?>"</script>
+                    
                 <?php
                 }
                 ?>
@@ -149,7 +157,7 @@
                         <label><b>First Name</b></label>
                     </td>
                     <td>
-                        <input type="text" placeholder="Enter First Name" name="firstName" required>
+                        <input type="text" class="form-control" placeholder="Enter First Name" name="firstName" required>
                     </td>
                 </tr>
                 <tr>
@@ -157,7 +165,7 @@
                         <label><b>Last Name</b></label>
                     </td>
                     <td>
-                        <input type="text" placeholder="Enter Last Name" name="lastName" required>
+                        <input type="text" class="form-control" placeholder="Enter Last Name" name="lastName" required>
                     </td>
                 </tr>
                 <tr>
@@ -179,7 +187,7 @@
                         <label><b>Phone</b></label>
                     </td>
                     <td>
-                        <input type="text" placeholder="Enter Phone" name="phone" required>
+                        <input type="text" class="form-control" placeholder="Enter Phone" name="phone" required>
                     </td>
                 </tr>
                 <tr>
@@ -201,7 +209,7 @@
                         <label><b>Address</b></label>
                     </td>
                     <td>
-                        <input type="text" placeholder="Enter Address" name="userAddress" required>
+                        <input type="text" class="form-control" placeholder="Enter Address" name="userAddress" required>
                     </td>
                 </tr>
                 <tr>
@@ -227,7 +235,7 @@
                         <label><b>Last donated</b></label>
                     </td>
                     <td>
-                        <input type="date" placeholder="Enter Last donation date" name="lastDonated">
+                        <input type="date" class="form-control" placeholder="Enter Last donation date" name="lastDonated">
                     </td>
                 </tr>
                 <tr>
@@ -235,7 +243,7 @@
                         <label><b>Total donated</b></label>
                     </td>
                     <td>
-                        <input type="number" placeholder="Enter total donation" name="totalDonated"> Times
+                        <input type="number" class="form-control" placeholder="Enter total donation" name="totalDonated"> Times
                     </td>
                 </tr>
                 <tr>
@@ -243,7 +251,7 @@
                         <label><b>Upload photo</b></label>
                     </td>
                     <td>
-                        <input type="file" name="file" id="file" required>
+                        <input type="file" class="form-control" name="file" id="file" required>
                     </td>
                 </tr>
                 <tr>
@@ -251,7 +259,7 @@
                         <label><b>E-mail</b></label>
                     </td>
                     <td>
-                        <input type="email" placeholder="Enter Email" name="userEmail" required>
+                        <input type="email" class="form-control" placeholder="Enter Email" name="userEmail" required>
                     </td>
                 </tr>
                 <tr>
@@ -259,7 +267,7 @@
                         <label><b>Password</b></label>
                     </td>
                     <td>
-                        <input type="password" placeholder="Enter Password" name="userPassword" required>
+                        <input type="password" class="form-control" placeholder="Enter Password" name="userPassword" required>
                     </td>
                 </tr>
             </table>
@@ -304,7 +312,9 @@ if (isset($_POST['signup']) && !empty($_REQUEST['firstName'])) {
                     user_first_name,
                     user_last_name,
                     phone,
+                    user_type_id,
                     user_area_id,
+                    available_to_donate,
                     user_address,
                     blood_group_id,
                     last_donated,
@@ -318,7 +328,9 @@ if (isset($_POST['signup']) && !empty($_REQUEST['firstName'])) {
                     ('$_POST[firstName]',
                     '$_POST[lastName]',
                     '$_POST[phone]',
+                    '3',
                     '$_POST[areaId]',
+                    '1',
                     '$_POST[userAddress]',
                     '$_POST[groupId]',
                     '$_POST[lastDonated]',
@@ -329,7 +341,9 @@ if (isset($_POST['signup']) && !empty($_REQUEST['firstName'])) {
                     '$_POST[userPassword]'
 
                     )";
-        header("Refresh:0; url=signup_succeed.php");
+        ?>
+        <script language="JavaScript">window.location = "signup_succeed.php"</script>
+        <?php
         if (!mysql_query($sql)) {
             die('Error:' . mysql_error());
         }

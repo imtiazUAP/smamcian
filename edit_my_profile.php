@@ -26,10 +26,10 @@ if ($_SESSION['user_id'] == $_GET["user_id"] || $_SESSION['user_type_id'] == '2'
             a.user_area_name,
             b.blood_group_name,
             bt.batch_name
-            FROM USER AS u
+            FROM user AS u
             LEFT OUTER JOIN blood_group b
             ON b.blood_group_id = u.blood_group_id
-            LEFT OUTER JOIN AREA a
+            LEFT OUTER JOIN area a
             ON a.user_area_id = u.user_area_id
             LEFT OUTER JOIN batch bt
             ON bt.batch_id = u.batch_id
@@ -69,7 +69,7 @@ if ($_SESSION['user_id'] == $_GET["user_id"] || $_SESSION['user_type_id'] == '2'
                             <label><b>First Name</b></label>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter First Name" name="firstName"
+                            <input type="text" class="form-control" placeholder="Enter First Name" name="firstName"
                                    value="<?= $userFirstName ?>" required>
                         </td>
                     </tr>
@@ -78,8 +78,27 @@ if ($_SESSION['user_id'] == $_GET["user_id"] || $_SESSION['user_type_id'] == '2'
                             <label><b>Last Name</b></label>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter Last Name" name="lastName"
+                            <input type="text" class="form-control" placeholder="Enter Last Name" name="lastName"
                                    value="<?= $userLastName ?>" required>
+                        </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            <label><b>Batch: </b></label>
+                        </td>
+                        <td><select name="batchId" class="form-control" id="batchId" required>
+                                <?php
+                                $query = "SELECT DISTINCT batch_id,batch_name FROM batch ORDER BY batch_id";
+                                $rs = mysql_query($query) or die ('Error submitting');
+                                while ($rows = mysql_fetch_assoc($rs)) {
+                                    if ($batchId == $rows["batch_id"]) {
+                                        $selected = 'selected="selected"';
+                                    } else {
+                                        $selected = '';
+                                    }
+                                    print("<option value=\"" . $rows["batch_id"] . "\" " . $selected . "  >" . $rows["batch_name"] . "</option>");
+                                }
+                                ?>
                         </td>
                     </tr>
                     <tr>
@@ -87,7 +106,7 @@ if ($_SESSION['user_id'] == $_GET["user_id"] || $_SESSION['user_type_id'] == '2'
                             <label><b>Phone</b></label>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter Phone" value="<?= $phone ?>" name="phone" required>
+                            <input type="text" class="form-control" placeholder="Enter Phone" value="<?= $phone ?>" name="phone" required>
                         </td>
                     </tr>
                     <tr>
@@ -112,37 +131,56 @@ if ($_SESSION['user_id'] == $_GET["user_id"] || $_SESSION['user_type_id'] == '2'
                     </tr>
                     <tr>
                         <td>
-                            <label><b>Address</b></label>
+                            <label><b>Address: </b></label>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter Address" name="userAddress"
+                            <input type="text" class="form-control" placeholder="Enter Address" name="userAddress"
                                    value="<?= $userAddress ?>" required>
+                        </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            <label><b>Blood group: </b></label>
+                        </td>
+                        <td><select name="bloodGroupId" class="form-control" id="bloodGroupId " required>
+                                <?php
+                                $query = "SELECT DISTINCT blood_group_id, blood_group_name FROM blood_group ORDER BY blood_group_id";
+                                $rs = mysql_query($query) or die ('Error submitting');
+                                while ($rows = mysql_fetch_assoc($rs)) {
+                                    if ($bloodGroupId == $rows["blood_group_id"]) {
+                                        $selected = 'selected="selected"';
+                                    } else {
+                                        $selected = '';
+                                    }
+                                    print("<option value=\"" . $rows["blood_group_id"] . "\" " . $selected . "  >" . $rows["blood_group_name"] . "</option>");
+                                }
+                                ?>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label><b>Last donated</b></label>
+                            <label><b>Last donated: </b></label>
                         </td>
                         <td>
-                            <input type="date" placeholder="Enter Last donation date" name="lastDonated"
+                            <input type="date" class="form-control" placeholder="Enter Last donation date" name="lastDonated"
                                    value="<?php print(date("Y-m-d")); ?>">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label><b>Total donated</b></label>
+                            <label><b>Total donated: </b></label>
                         </td>
                         <td>
-                            <input type="number" placeholder="Enter total donation" name="totalDonated"
+                            <input type="number" class="form-control" placeholder="Enter total donation" name="totalDonated"
                                    value="<?= $totalDonated ?>"> Times
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label><b>Upload photo</b></label>
+                            <label><b>Upload photo: </b></label>
                         </td>
                         <td>
-                            <input type="file" name="file" id="file" required>
+                            <input class="form-control" type="file" name="file" id="file">
                         </td>
                     </tr>
                     <tr>
@@ -150,7 +188,7 @@ if ($_SESSION['user_id'] == $_GET["user_id"] || $_SESSION['user_type_id'] == '2'
                             <label><b>E-mail</b></label>
                         </td>
                         <td>
-                            <input type="email" placeholder="Enter Email" name="userEmail" value="<?= $userEmail ?>"
+                            <input type="email" class="form-control" placeholder="Enter Email" name="userEmail" value="<?= $userEmail ?>"
                                    required>
                         </td>
                     </tr>
@@ -159,7 +197,7 @@ if ($_SESSION['user_id'] == $_GET["user_id"] || $_SESSION['user_type_id'] == '2'
                             <label><b>Password</b></label>
                         </td>
                         <td>
-                            <input type="password" placeholder="Enter Password" name="userPassword" required>
+                            <input type="password"class="form-control"  placeholder="Enter Password" name="userPassword">
                         </td>
                     </tr>
                 </table>
@@ -172,7 +210,7 @@ if ($_SESSION['user_id'] == $_GET["user_id"] || $_SESSION['user_type_id'] == '2'
     </form>
     <?php
     if (isset($_POST["btnSubmit"]) && $_REQUEST['userEmail']) {
-        $post_photo = $_FILES['file']['name'];
+    	$post_photo = $_FILES['file']['name'];
         $post_photo_tmp = $_FILES['file']['tmp_name'];
         $ext = pathinfo($post_photo, PATHINFO_EXTENSION); // getting image extension
         if ($ext == 'png' || $ext == 'PNG' || $ext == 'jpg' || $ext == 'jpeg' || $ext == 'JPG' || $ext == 'JPEG' || $ext == 'gif' || $ext == 'GIF') {
@@ -200,30 +238,77 @@ if ($_SESSION['user_id'] == $_GET["user_id"] || $_SESSION['user_type_id'] == '2'
             if ($photoUrl) {
                 unlink('images/users/' . $photoUrl);
             }
-
-            $strquery = "UPDATE
-                    user
-                    SET
-                    user_first_name= '" . ($_POST['firstName']) . "',
-                    user_last_name= '" . $_REQUEST['lastName'] . "',
-                    phone= '" . $_REQUEST['phone'] . "',
-                    user_area_id= '" . $_REQUEST['areaId'] . "',
-                    last_donated= '" . $_REQUEST['lastDonated'] . "',
-                    total_donated= '" . $_REQUEST['totalDonated'] . "',
-                    photo_url='" . $photo_name . "',
-                    user_email= '" . $_REQUEST['userEmail'] . "',
-                    user_password= '" . $_REQUEST['userPassword'] . "'
-                     WHERE user_id='" . $userId . "'";
-            $result = mysql_query($strquery);
-
-            if ($result) {
-                ?>
-                <script language="JavaScript">window.location = "my_profile.php?user_id=<?= $userId ?>";</script>
-            <?php
-            } else {
-                die('Error:' . mysql_error());
-            }
-        }
+	}
+	           
+	if(!$_FILES['file']['name'] && !$_REQUEST['userPassword']){
+	    $strquery = "UPDATE
+	                    user
+	                    SET
+	                    user_first_name= '" . ($_POST['firstName']) . "',
+	                    user_last_name= '" . $_REQUEST['lastName'] . "',
+	                    batch_id= '" . $_REQUEST['batchId'] . "',
+	                    phone= '" . $_REQUEST['phone'] . "',
+	                    user_area_id= '" . $_REQUEST['areaId'] . "',
+	                    blood_group_id= '" . $_REQUEST['bloodGroupId'] . "',
+	                    last_donated= '" . $_REQUEST['lastDonated'] . "',
+	                    total_donated= '" . $_REQUEST['totalDonated'] . "',
+	                    user_email= '" . $_REQUEST['userEmail'] . "'
+	                     WHERE user_id='" . $userId . "'";
+	}else if($_FILES['file']['name'] && !$_REQUEST['userPassword']){
+		$strquery = "UPDATE
+	            user
+	            SET
+	            user_first_name= '" . ($_POST['firstName']) . "',
+	            user_last_name= '" . $_REQUEST['lastName'] . "',
+	            batch_id= '" . $_REQUEST['batchId'] . "',
+	            phone= '" . $_REQUEST['phone'] . "',
+	            user_area_id= '" . $_REQUEST['areaId'] . "',
+	            blood_group_id= '" . $_REQUEST['bloodGroupId'] . "',
+	            last_donated= '" . $_REQUEST['lastDonated'] . "',
+	            total_donated= '" . $_REQUEST['totalDonated'] . "',
+	            photo_url='" . $photo_name . "',
+	            user_email= '" . $_REQUEST['userEmail'] . "'
+	             WHERE user_id='" . $userId . "'";
+	}else if(!$_FILES['file']['name'] && $_REQUEST['userPassword']){
+		$strquery = "UPDATE
+	            user
+	            SET
+	            user_first_name= '" . ($_POST['firstName']) . "',
+	            user_last_name= '" . $_REQUEST['lastName'] . "',
+	            batch_id= '" . $_REQUEST['batchId'] . "',
+	            phone= '" . $_REQUEST['phone'] . "',
+	            user_area_id= '" . $_REQUEST['areaId'] . "',
+	            blood_group_id= '" . $_REQUEST['bloodGroupId'] . "',
+	            last_donated= '" . $_REQUEST['lastDonated'] . "',
+	            total_donated= '" . $_REQUEST['totalDonated'] . "',
+	            user_email= '" . $_REQUEST['userEmail'] . "',
+	            user_password= '" . $_REQUEST['userPassword'] . "'
+	             WHERE user_id='" . $userId . "'";
+	} else{
+	    $strquery = "UPDATE
+	            user
+	            SET
+	            user_first_name= '" . ($_POST['firstName']) . "',
+	            user_last_name= '" . $_REQUEST['lastName'] . "',
+	            batch_id= '" . $_REQUEST['batchId'] . "',
+	            phone= '" . $_REQUEST['phone'] . "',
+	            user_area_id= '" . $_REQUEST['areaId'] . "',
+	            blood_group_id= '" . $_REQUEST['bloodGroupId'] . "',
+	            last_donated= '" . $_REQUEST['lastDonated'] . "',
+	            total_donated= '" . $_REQUEST['totalDonated'] . "',
+	            photo_url='" . $photo_name . "',
+	            user_email= '" . $_REQUEST['userEmail'] . "',
+	            user_password= '" . $_REQUEST['userPassword'] . "'
+	             WHERE user_id='" . $userId . "'";
+	}
+	
+    	$result = mysql_query($strquery);
+    	if ($result) { ?>
+        	<script language="JavaScript">window.location = "my_profile.php?user_id=<?= $userId ?>";</script>
+    	<?php
+    	} else {
+        	die('Error:' . mysql_error());
+    	}
     }
     ?>
     </div>

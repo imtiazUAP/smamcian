@@ -25,7 +25,7 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                             <label><b>E-mail of user:</b></label>
                         </td>
                         <td>
-                            <input type="text" placeholder="Enter email" name="email" required>
+                            <input type="text" class="form-control" placeholder="Enter email" name="email" required>
                         </td>
                     </tr>
                 </table>
@@ -37,7 +37,7 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
         </form>
         <?php
         if (isset($_POST["btnSubmit"]) && $_REQUEST['email']) {
-            $sql = "UPDATE USER SET active_flag = 0 where user_email='" . ($_POST['email']) . "'";
+            $sql = "UPDATE user SET active_flag = 0 where user_email='" . ($_POST['email']) . "'";
 
             $result = mysql_query($sql);
         }
@@ -63,17 +63,17 @@ if ($_SESSION['user_type_id'] == '2' || $_SESSION['user_type_id'] == '1') {
                                           a.user_area_name,
                                           b.blood_group_name,
                                           bt.batch_name
-                                        FROM USER AS u
+                                        FROM user AS u
                                           LEFT OUTER JOIN blood_group b
                                             ON b.blood_group_id = u.blood_group_id
-                                          LEFT OUTER JOIN AREA a
+                                          LEFT OUTER JOIN area a
                                             ON a.user_area_id = u.user_area_id
                                             LEFT OUTER JOIN batch bt
                                             ON bt.batch_id = u.batch_id
                                           WHERE
                                           u.active_flag = 0";
             $results = mysql_query($strquery);
-            $num = mysql_numrows($results);
+            $num = mysql_num_rows($results);
 
             $i = 0;
             while ($i < $num) {
